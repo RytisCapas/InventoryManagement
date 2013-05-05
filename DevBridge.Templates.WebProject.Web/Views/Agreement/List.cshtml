@@ -1,0 +1,13 @@
+﻿@model DevBridge.Templates.WebProject.Web.Logic.Models.Agreement.AgreementListViewModel
+
+@{
+    ViewBag.Title = "Agreements";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Agreements</h2>
+<ul>
+@foreach (var agreement in Model.Agreements) {
+    Html.RenderPartial(MVC.Agreement.Views.Partial.AgreementItem, agreement);
+}
+</ul>
