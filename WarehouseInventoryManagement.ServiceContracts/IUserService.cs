@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using WarehouseInventoryManagement.DataEntities.Entities;
+using WarehouseInventoryManagement.Models.Dtos;
 
 namespace WarehouseInventoryManagement.ServiceContracts
 {
@@ -17,5 +15,9 @@ namespace WarehouseInventoryManagement.ServiceContracts
         User CreateUser(User user);
 
         User ValidateUser(string username, string password);
+
+        List<User> GetAllUsers();
+
+        PagedEntityListDto<User> GetPage(PagedEntityListFilterDto filter);
     }
 }

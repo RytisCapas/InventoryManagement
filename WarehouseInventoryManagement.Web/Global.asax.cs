@@ -43,7 +43,7 @@ namespace WarehouseInventoryManagement.Web
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
-            routes.MapRoute("ProductDefault", "", new { controller = MVC.Product.Name, action = MVC.Product.ActionNames.Index });
+            routes.MapRoute("UserDefault", "", new { controller = MVC.User.Name, action = MVC.User.ActionNames.List });
         }
 
         protected void Application_Start()

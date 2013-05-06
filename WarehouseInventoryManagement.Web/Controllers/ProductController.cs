@@ -15,5 +15,11 @@ namespace WarehouseInventoryManagement.Web.Controllers
             return null;
         }
 
+        [Authorize]
+        public virtual ActionResult List()
+        {
+            return null;
+        }
+
     }
 }

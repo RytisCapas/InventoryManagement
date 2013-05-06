@@ -1,4 +1,5 @@
-﻿@{
+﻿@using WarehouseInventoryManagement.Web.Helpers
+@{
     var loginPage = HttpContext.Current.Request.Url.AbsolutePath.ToLower().Contains("account/login");
 }	
 <div class="shell">
@@ -11,8 +12,8 @@
 				    Welcome <a href="#"><strong>Administrator</strong></a>
 				    <span>|</span>
 				    <a href="#">Profile Settings</a>
-				    <span>|</span>
-				    <a href="#">Log out</a>
+                    <span>|</span>
+                    @Html.ActionLink("Atsijungti", MVC.Account.Logout())
 			    </div>    
             }
 			
@@ -24,8 +25,8 @@
     {
         <div id="navigation">
 			<ul>
-			    <li><a href="#" class="active"><span>Dashboard</span></a></li>
-			    <li><a href="#"><span>New Articles</span></a></li>
+			    <li><a href="@Url.Action(MVC.User.List())" @Html.IsActive(MVC.User.List()) ><span>Vartotojai</span></a></li>
+			    <li><a href="@Url.Action(MVC.Product.List())" @Html.IsActive(MVC.Product.List()) ><span>Inventorius</span></a></li>
 			    <li><a href="#"><span>User Management</span></a></li>
 			    <li><a href="#"><span>Photo Gallery</span></a></li>
 			    <li><a href="#"><span>Products</span></a></li>

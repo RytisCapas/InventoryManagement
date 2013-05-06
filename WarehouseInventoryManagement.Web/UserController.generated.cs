@@ -22,13 +22,13 @@ using System.Web.Routing;
 using T4MVC;
 namespace WarehouseInventoryManagement.Web.Controllers
 {
-    public partial class ProductController
+    public partial class UserController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ProductController() { }
+        public UserController() { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected ProductController(Dummy d) { }
+        protected UserController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -46,13 +46,13 @@ namespace WarehouseInventoryManagement.Web.Controllers
 
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ProductController Actions { get { return MVC.Product; } }
+        public UserController Actions { get { return MVC.User; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Product";
+        public readonly string Name = "User";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Product";
+        public const string NameConst = "User";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -82,14 +82,16 @@ namespace WarehouseInventoryManagement.Web.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string List = "List";
             }
+            public readonly string List = "~/Views/User/List.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_ProductController : WarehouseInventoryManagement.Web.Controllers.ProductController
+    public partial class T4MVC_UserController : WarehouseInventoryManagement.Web.Controllers.UserController
     {
-        public T4MVC_ProductController() : base(Dummy.Instance) { }
+        public T4MVC_UserController() : base(Dummy.Instance) { }
 
         partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 

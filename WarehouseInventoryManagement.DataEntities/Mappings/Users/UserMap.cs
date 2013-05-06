@@ -36,8 +36,8 @@ namespace WarehouseInventoryManagement.DataEntities.Mappings
                 .Table("UserRoles")
                 .ParentKeyColumn("UserId")
                 .ChildKeyColumn("RoleId")
-                .OrderBy("CreatedOn DESC")
-                .Cascade.All().BatchSize(10);
+                //.OrderBy("CreatedOn DESC")
+                .Cascade.All();
 
             //References(f => f.Customer).LazyLoad().Not.Nullable().Cascade.SaveUpdate();
         }

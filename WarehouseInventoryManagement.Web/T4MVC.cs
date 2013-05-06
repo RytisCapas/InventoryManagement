@@ -27,6 +27,7 @@ public static class MVC
     public static WarehouseInventoryManagement.Web.Controllers.AccountController Account = new WarehouseInventoryManagement.Web.Controllers.T4MVC_AccountController();
     public static WarehouseInventoryManagement.Web.Controllers.HomeController Home = new WarehouseInventoryManagement.Web.Controllers.T4MVC_HomeController();
     public static WarehouseInventoryManagement.Web.Controllers.ProductController Product = new WarehouseInventoryManagement.Web.Controllers.T4MVC_ProductController();
+    public static WarehouseInventoryManagement.Web.Controllers.UserController User = new WarehouseInventoryManagement.Web.Controllers.T4MVC_UserController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 

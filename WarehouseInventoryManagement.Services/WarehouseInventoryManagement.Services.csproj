@@ -90,6 +90,10 @@
       <Project>{44EB262A-2060-4906-B5B1-722F9BB1775B}</Project>
       <Name>WarehouseInventoryManagement.DataEntities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WarehouseInventoryManagement.Models\WarehouseInventoryManagement.Models.csproj">
+      <Project>{21637934-ca76-4ebe-a3c4-37c7e1643d63}</Project>
+      <Name>WarehouseInventoryManagement.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WarehouseInventoryManagement.ServiceContracts\WarehouseInventoryManagement.ServiceContracts.csproj">
       <Project>{0F01C633-D2BC-4DE5-951D-66D4B4AF082C}</Project>
       <Name>WarehouseInventoryManagement.ServiceContracts</Name>

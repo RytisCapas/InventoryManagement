@@ -5,8 +5,12 @@ using System.Text;
 using System.Threading;
 using System.Transactions;
 using System.Web.Security;
+using NHibernate;
+using NHibernate.Criterion;
+using NHibernate.Criterion.Lambda;
 using WarehouseInventoryManagement.DataContracts;
 using WarehouseInventoryManagement.DataEntities.Entities;
+using WarehouseInventoryManagement.Models.Dtos;
 using WarehouseInventoryManagement.ServiceContracts;
 
 namespace WarehouseInventoryManagement.Services
@@ -130,6 +134,112 @@ namespace WarehouseInventoryManagement.Services
             }
 
             return null;
+        }
+
+        public List<User> GetAllUsers()
+        {
+            try
+            {
+                var query = repository.AsQueryOver<User>().Where(f => f.DeletedOn == null).Future();
+
+                return query.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new UserException("Failed to retrieve Users list.", ex);
+            }
+        }
+
+        public PagedEntityListDto<User> GetPage(PagedEntityListFilterDto filter)
+        {
+            try
+            {
+                int count;
+
+                var query = repository.AsQueryOver<User>().Where(f => f.DeletedOn == null);
+
+                if (filter != null)
+                {
+                    query = AddSortingCriterias(filter,query);
+                }
+
+                if (!string.IsNullOrEmpty(filter.SearchText))
+                {
+                    query = AddSearchCriterias(filter.SearchText, query);
+                }
+
+                var entities = query
+                    .Skip((filter.StartPage - 1) * filter.ItemsPerPage)
+                    .Take(filter.ItemsPerPage)
+                    .Future<User>();
+
+                var rowCount = CriteriaTransformer
+                    .TransformToRowCount(query.UnderlyingCriteria)
+                    .Future<int>();
+                count = rowCount.FirstOrDefault();
+                var entitiesList = entities.ToList();
+
+                var pagedList = new PagedEntityListDto<User>(entitiesList, count);
+
+                pagedList.Page = filter.StartPage;
+
+                return pagedList;
+
+            }
+            catch (Exception ex)
+            {
+                throw new UserException("Failed to retrieve Users list.", ex);
+            }
+        }
+
+        private static IQueryOver<User, User> AddSearchCriterias(string search, IQueryOver<User, User> query)
+        {
+            IList<ICriterion> searchCriterias = new List<ICriterion>();
+
+            User userAlias = null;
+
+            searchCriterias.Add(Restrictions.On(() => userAlias.UserName ).IsInsensitiveLike(string.Format("%{0}%", search.ToLower())));
+            searchCriterias.Add(Restrictions.On(() => userAlias.FirstName).IsInsensitiveLike(string.Format("%{0}%", search.ToLower())));
+            searchCriterias.Add(Restrictions.On(() => userAlias.LastName).IsInsensitiveLike(string.Format("%{0}%", search.ToLower())));
+
+            int searchInteger;
+
+            if (int.TryParse(search, out searchInteger))
+            {
+                searchCriterias.Add(Restrictions.On(() => userAlias.Id).IsLike(searchInteger));
+            }
+
+            query = CommonUtils.AddQueryOverSearchCriterias(query, searchCriterias);
+
+            return query;
+        }
+
+        private static IQueryOver<User, User> AddSortingCriterias(PagedEntityListFilterDto filter, IQueryOver<User, User> query)
+        {
+            IQueryOverOrderBuilder<User, User> builder = null;
+
+            switch (filter.Column)
+            {
+                case "Id":
+                    builder = query.OrderBy(x => x.Id);
+                    break;
+                case "UserName":
+                    builder = query.OrderBy(x => x.UserName);
+                    break;
+                case "LastName":
+                    builder = query.OrderBy(x => x.LastName);
+                    break;
+                case "LastLogin":
+                    builder = query.OrderBy(x => x.LastLogin);
+                    break;
+            }
+
+            if (builder != null)
+            {
+                query = filter.AscendingOrder ? builder.Asc : builder.Desc;
+            }
+
+            return query;
         }
     }
 }

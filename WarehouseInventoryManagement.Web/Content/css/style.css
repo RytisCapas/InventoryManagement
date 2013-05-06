@@ -177,3 +177,5 @@ html, body { height: 100%;}
 .login-form {margin: 80px auto;width: 450px; }
 
 .validation-summary-errors li {color: #ba4c32;background-image: url('images/msg-error.gif');padding: 9px 10px 9px 40px;font-size: 12px;background-repeat: no-repeat;background-position: 10px 5px;list-style: none; background-color: #f3c598;border: solid 1px #e8b084;margin: 0px -1px 0px -1px;}
+
+.add-head {margin: -2px 0px 0px 25px;}
