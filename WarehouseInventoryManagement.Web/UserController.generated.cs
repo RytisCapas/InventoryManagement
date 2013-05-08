@@ -25,9 +25,6 @@ namespace WarehouseInventoryManagement.Web.Controllers
     public partial class UserController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public UserController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected UserController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -44,6 +41,24 @@ namespace WarehouseInventoryManagement.Web.Controllers
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult List()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.List);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Delete()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Delete);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Edit()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public UserController Actions { get { return MVC.User; } }
@@ -62,6 +77,9 @@ namespace WarehouseInventoryManagement.Web.Controllers
         {
             public readonly string Index = "Index";
             public readonly string List = "List";
+            public readonly string Delete = "Delete";
+            public readonly string Edit = "Edit";
+            public readonly string CreateUser = "CreateUser";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -69,9 +87,49 @@ namespace WarehouseInventoryManagement.Web.Controllers
         {
             public const string Index = "Index";
             public const string List = "List";
+            public const string Delete = "Delete";
+            public const string Edit = "Edit";
+            public const string CreateUser = "CreateUser";
         }
 
 
+        static readonly ActionParamsClass_List s_params_List = new ActionParamsClass_List();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_List ListParams { get { return s_params_List; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_List
+        {
+            public readonly string gridSortOptions = "gridSortOptions";
+            public readonly string page = "page";
+            public readonly string itemsPerPage = "itemsPerPage";
+            public readonly string search = "search";
+        }
+        static readonly ActionParamsClass_Delete s_params_Delete = new ActionParamsClass_Delete();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Delete DeleteParams { get { return s_params_Delete; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Delete
+        {
+            public readonly string id = "id";
+            public readonly string returnUrl = "returnUrl";
+        }
+        static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Edit EditParams { get { return s_params_Edit; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Edit
+        {
+            public readonly string id = "id";
+            public readonly string returnUrl = "returnUrl";
+        }
+        static readonly ActionParamsClass_CreateUser s_params_CreateUser = new ActionParamsClass_CreateUser();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_CreateUser CreateUserParams { get { return s_params_CreateUser; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_CreateUser
+        {
+            public readonly string model = "model";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -82,9 +140,26 @@ namespace WarehouseInventoryManagement.Web.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string CreateUser = "CreateUser";
                 public readonly string List = "List";
             }
+            public readonly string CreateUser = "~/Views/User/CreateUser.cshtml";
             public readonly string List = "~/Views/User/List.cshtml";
+            static readonly _PartialClass s_Partial = new _PartialClass();
+            public _PartialClass Partial { get { return s_Partial; } }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public partial class _PartialClass
+            {
+                static readonly _ViewNamesClass s_ViewNames = new _ViewNamesClass();
+                public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
+                public class _ViewNamesClass
+                {
+                    public readonly string Controls = "Controls";
+                    public readonly string ListSearch = "ListSearch";
+                }
+                public readonly string Controls = "~/Views/User/Partial/Controls.cshtml";
+                public readonly string ListSearch = "~/Views/User/Partial/ListSearch.cshtml";
+            }
         }
     }
 
@@ -102,12 +177,57 @@ namespace WarehouseInventoryManagement.Web.Controllers
             return callInfo;
         }
 
-        partial void ListOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void ListOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, MvcContrib.UI.Grid.GridSortOptions gridSortOptions, int? page, int? itemsPerPage, string search);
 
-        public override System.Web.Mvc.ActionResult List()
+        public override System.Web.Mvc.ActionResult List(MvcContrib.UI.Grid.GridSortOptions gridSortOptions, int? page, int? itemsPerPage, string search)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.List);
-            ListOverride(callInfo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "gridSortOptions", gridSortOptions);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "itemsPerPage", itemsPerPage);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "search", search);
+            ListOverride(callInfo, gridSortOptions, page, itemsPerPage, search);
+            return callInfo;
+        }
+
+        partial void DeleteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id, string returnUrl);
+
+        public override System.Web.Mvc.ActionResult Delete(int id, string returnUrl)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Delete);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
+            DeleteOverride(callInfo, id, returnUrl);
+            return callInfo;
+        }
+
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id, string returnUrl);
+
+        public override System.Web.Mvc.ActionResult Edit(int id, string returnUrl)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
+            EditOverride(callInfo, id, returnUrl);
+            return callInfo;
+        }
+
+        partial void CreateUserOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Web.Mvc.ActionResult CreateUser()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.CreateUser);
+            CreateUserOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void CreateUserOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, WarehouseInventoryManagement.Models.Models.User.UserCreateViewModel model);
+
+        public override System.Web.Mvc.ActionResult CreateUser(WarehouseInventoryManagement.Models.Models.User.UserCreateViewModel model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.CreateUser);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            CreateUserOverride(callInfo, model);
             return callInfo;
         }
 

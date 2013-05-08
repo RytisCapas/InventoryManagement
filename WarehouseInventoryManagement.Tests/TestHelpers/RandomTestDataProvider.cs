@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using WarehouseInventoryManagement.DataEntities.Entities;
 using WarehouseInventoryManagement.DataEntities.Enums;
@@ -58,7 +59,7 @@ namespace WarehouseInventoryManagement.Tests.TestHelpers
 
         public User CreateUser()
         {
-            return new User
+            var user = new User
                 {
                     UserName = ProvideRandomString(10),
                     FirstName = ProvideRandomString(20),
@@ -71,9 +72,13 @@ namespace WarehouseInventoryManagement.Tests.TestHelpers
                     Phone = ProvideRandomString(20),
                     Email = ProvideRandomString(20),
                     LastLogin = ProvideRandomDateTime(),
-                    CreatedBy = ProvideRandomString(10)
-
+                    CreatedBy = ProvideRandomString(10),
+                    Roles  = new List<Role>()
                 };
+
+                user.Roles.Add(new Role{Id = 1});
+                return user;
+
         }
 
         public Agreement CreateAgreement(Customer customer = null)

@@ -94,6 +94,7 @@ namespace WarehouseInventoryManagement.Services
                     user.PasswordSalt = cryptoService.GetSalt();
                     user.Password = cryptoService.GetHashedValue(user.Password, user.PasswordSalt);
                     user.CreatedOn = DateTime.Now;
+                    user.ModifiedOn = DateTime.Now;
                     repository.Save(user);
                     repository.Commit();
 
@@ -192,21 +193,35 @@ namespace WarehouseInventoryManagement.Services
             }
         }
 
+        public List<Role> GetAllRoles()
+        {
+            try
+            {
+                var query = repository.AsQueryOver<Role>().Where(f => f.DeletedOn == null).Future();
+
+                return query.ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw new UserException("Failed to retrieve Role list.", ex);
+            }
+        } 
+
         private static IQueryOver<User, User> AddSearchCriterias(string search, IQueryOver<User, User> query)
         {
             IList<ICriterion> searchCriterias = new List<ICriterion>();
 
-            User userAlias = null;
 
-            searchCriterias.Add(Restrictions.On(() => userAlias.UserName ).IsInsensitiveLike(string.Format("%{0}%", search.ToLower())));
-            searchCriterias.Add(Restrictions.On(() => userAlias.FirstName).IsInsensitiveLike(string.Format("%{0}%", search.ToLower())));
-            searchCriterias.Add(Restrictions.On(() => userAlias.LastName).IsInsensitiveLike(string.Format("%{0}%", search.ToLower())));
+            searchCriterias.Add(Restrictions.On<User>(x => x.UserName ).IsInsensitiveLike(string.Format("%{0}%", search.ToLower())));
+            searchCriterias.Add(Restrictions.On<User>(x => x.FirstName).IsInsensitiveLike(string.Format("%{0}%", search.ToLower())));
+            searchCriterias.Add(Restrictions.On<User>(x => x.LastName).IsInsensitiveLike(string.Format("%{0}%", search.ToLower())));
 
             int searchInteger;
 
             if (int.TryParse(search, out searchInteger))
             {
-                searchCriterias.Add(Restrictions.On(() => userAlias.Id).IsLike(searchInteger));
+                searchCriterias.Add(Restrictions.On<User>(x => x.Id).IsLike(searchInteger));
             }
 
             query = CommonUtils.AddQueryOverSearchCriterias(query, searchCriterias);

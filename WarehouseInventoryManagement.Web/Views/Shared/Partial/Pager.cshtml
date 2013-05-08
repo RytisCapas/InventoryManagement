@@ -1,0 +1,23 @@
+﻿@using WarehouseInventoryManagement.Common
+@using WarehouseInventoryManagement.Tools.Extensions
+
+@model MvcContrib.Pagination.IPagination
+           
+@if (Model != null && Model.TotalPages > 0)
+{
+    var onlyQueryStringInLinks = false;
+    var url = string.Empty;
+
+    if (((Object)ViewBag).Has("OnlyQueryStringInLinks"))
+    {
+        bool.TryParse(ViewData["OnlyQueryStringInLinks"].ToString(), out onlyQueryStringInLinks);
+    }
+
+    if (((Object)ViewBag).Has("Url"))
+    {
+        url = (string)ViewData["Url"];
+    }
+        
+    @Html.Raw(Html.Pager(Model, onlyQueryStringInLinks).Url(url).ToString())
+}
+

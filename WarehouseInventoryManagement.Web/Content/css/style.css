@@ -85,7 +85,7 @@ h3 a{ text-decoration: none; }
 .table {}
 .table th{ background:#fffdfa url(images/th.gif) repeat-x 0 0; color:#818181; text-align: left; padding:7px 10px; border-bottom:solid 1px #d2d1cb;}
 .table td{ background:#fbfcfc;  border-bottom:solid 1px #e0e0e0; padding:8px 10px; }
-.table tr.odd td{ background:#f8f8f8; }
+.table tr.gridrow_alternate td{ background:#f8f8f8; }
 .table tr:hover td{ background:#fff9e1; }
 .table a.ico{ }
 
@@ -179,3 +179,15 @@ html, body { height: 100%;}
 .validation-summary-errors li {color: #ba4c32;background-image: url('images/msg-error.gif');padding: 9px 10px 9px 40px;font-size: 12px;background-repeat: no-repeat;background-position: 10px 5px;list-style: none; background-color: #f3c598;border: solid 1px #e8b084;margin: 0px -1px 0px -1px;}
 
 .add-head {margin: -2px 0px 0px 25px;}
+
+a.active-pager {border-color: #8c3521;background: #ba4c32;color: #fff;}
+
+#search-form { float: left;}
+
+.single-form { width: 650px;}
+
+.form p.title {display: block;font-weight: bold;font-size: 13px;padding: 5px 0 10px;}
+
+.checkbox-label { width: 30%;float: left;}
+
+.field-validation-error {color: #f00;}

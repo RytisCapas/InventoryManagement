@@ -77,6 +77,7 @@
     <Compile Include="UserService\CryptoService.cs" />
     <Compile Include="UserService\UserService.cs" />
     <Compile Include="UserService\UserException.cs" />
+    <Compile Include="Utils\CommonUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

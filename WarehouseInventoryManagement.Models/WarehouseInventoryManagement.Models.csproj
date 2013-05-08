@@ -35,6 +35,9 @@
     <Reference Include="Microsoft.Web.Mvc">
       <HintPath>..\packages\Mvc2Futures.2.0.50217.0\lib\Microsoft.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="MvcContrib">
+      <HintPath>..\packages\MvcContrib.2.0.95.0\lib\MvcContrib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
@@ -54,11 +57,14 @@
     <Compile Include="Mappers\EntityToViewModel\EntityToViewModelMapper.cs" />
     <Compile Include="Mappers\MapperBase.cs" />
     <Compile Include="Mappers\ViewModelToDto\ViewModelToDto.Mapper.cs" />
+    <Compile Include="Mappers\ViewModelToEntity\Mapper.UserCreateViewModelToUser.cs" />
     <Compile Include="Mappers\ViewModelToEntity\ViewModelToEntityMapper.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Account\LoginStatusViewModel.cs" />
     <Compile Include="Models\Account\LoginViewModel.cs" />
     <Compile Include="Mappers\EntityToViewModel\Mapper.UserToUserViewModel.cs" />
+    <Compile Include="Models\User\RoleViewModel.cs" />
+    <Compile Include="Models\User\UserCreateViewModel.cs" />
     <Compile Include="Models\User\UserListViewModel.cs" />
     <Compile Include="Models\User\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

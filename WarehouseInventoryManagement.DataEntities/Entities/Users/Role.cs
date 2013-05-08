@@ -10,7 +10,7 @@ namespace WarehouseInventoryManagement.DataEntities.Entities
 
         public virtual bool IsDeleted { get; set; }
 
-        public virtual DateTime DeletedOn { get; set; }
+        public virtual DateTime? DeletedOn { get; set; }
 
     }
 }

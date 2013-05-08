@@ -19,5 +19,7 @@ namespace WarehouseInventoryManagement.ServiceContracts
         List<User> GetAllUsers();
 
         PagedEntityListDto<User> GetPage(PagedEntityListFilterDto filter);
+
+        List<Role> GetAllRoles();
     }
 }

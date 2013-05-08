@@ -1,0 +1,10 @@
+﻿@model  WarehouseInventoryManagement.Models.Models.User.UserListViewModel
+
+@using (Html.BeginForm(MVC.User.List(), FormMethod.Get, new { id = "search-form", @class = "form-inline" }))
+{
+    <label for="search">Paieška:</label>
+    <input type="text" id="search" name="search" class="field small-field" value="@Model.Search" />
+    <input type="submit" class="button" value="Ieškoti" />    
+}
+
+ <a href="@Url.Action(MVC.User.CreateUser())" class="add-button add-head"><span>Sukurti naują</span></a>
