@@ -1,16 +1,21 @@
-﻿@using WarehouseInventoryManagement.Models.Models.User
+﻿@using MvcContrib.UI.Grid
+@using WarehouseInventoryManagement.Models.Models
 @using WarehouseInventoryManagement.Tools
 @{
     Layout = MVC.Shared.Views.Layouts.BaseLayout;
 }
 
+@model WarehouseInventoryManagement.Models.Models.ItemListViewModel 
 				<!-- Box -->
 <div class="box">
     <!-- Box Head -->
     <div class="box-head">
-        <h2 class="left">Vartotojai</h2>
+        <h2 class="left">Inventorius</h2>
         <div class="right">
-            @Html.Partial(MVC.User.Views.Partial.ListSearch, Model)
+            
+            @{
+                Html.RenderPartial(MVC.Item.Views.Partial.ListSearch, Model);
+            }
 
         </div>
     </div>
@@ -20,17 +25,18 @@
     <div class="table">
 	
                         
-@*        @Html.Grid(Model.Users).Sort(Model.GridSortOptions).Columns(column =>
+        @Html.Grid(Model.Items).Sort(Model.GridSortOptions).Columns(column =>
             {
-                column.For(f => f.Id).Named("#").SortColumnName("Id").HeaderAttributes(@style => "width:35px").Attributes(@class => "aright");
-                column.For(f => f.UserName).Named("Prisijungimo vardas").SortColumnName("UserName");
-                column.For(f => f.FirstName).Named("Vardas").SortColumnName("Name").Sortable(false);
-                column.For(f => f.LastName).Named("Pavardė").SortColumnName("LastName");
+                column.For(f => f.Id).Named("#").SortColumnName("Id").HeaderAttributes(@style => "width:45px").Attributes(@class => "aright");
+                column.For(f => f.Name).Named("Pavadinimas").SortColumnName("Name");
+                column.For(f => f.CreatedOn).Named("Sukūrimo data").SortColumnName("CreatedOn");
+                column.For(f => f.CreatedBy).Named("Sukūrė").SortColumnName("LastName").Sortable(false);
+                column.For(f => f.ModifiedOn).Named("Keitimo data").SortColumnName("ModifiedOn");
     
-                column.For(f => Html.Partial(MVC.User.Views.Partial.Controls, f)).Named("Valdymas").Sortable(false).HeaderAttributes(@style => "width:115px");
+                column.For(f => Html.Partial(MVC.Item.Views.Partial.Controls, f)).Named("Valdymas").Sortable(false).HeaderAttributes(@style => "width:115px");
             }
              ).Attributes(@id => " productListTable", @class => "data-table buttons-cell tablesorter", @width =>"100%", @cellspacing => "0", @cellpadding => "0"
-             ).RenderUsing(new EmptyHeaderHtmlTableGridRenderer<UserViewModel>(Model.ControllerName, Model.ActionName))
+             ).RenderUsing(new EmptyHeaderHtmlTableGridRenderer<ItemViewModel>(Model.ControllerName, Model.ActionName))
                         
         @{
             var link = Url.Action(Model.ActionName, Model.ControllerName);
@@ -38,10 +44,10 @@
 
         <div class="pagging">
             <div class="right">
-                @Html.Partial(MVC.Shared.Views.Partial.Pager, Model.Users, new ViewDataDictionary { { "Url", @link } })
+                @Html.Partial(MVC.Shared.Views.Partial.Pager, Model.Items, new ViewDataDictionary { { "Url", @link } })
             </div>
 					        
-        </div>*@
+        </div>
     </div>
     <!-- Table -->
 					

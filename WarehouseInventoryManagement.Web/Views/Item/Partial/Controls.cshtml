@@ -1,0 +1,7 @@
+﻿@model  WarehouseInventoryManagement.Models.Models.ItemViewModel
+
+@if(Model != null)
+{
+    @Html.ActionLink("Ištrinti", MVC.Item.Delete(Model.Id, Request.Url.PathAndQuery), new { @class= "ico del delete-user"})
+    @Html.ActionLink("Redaguoti", MVC.Item.Edit(Model.Id, Request.Url.PathAndQuery), new { @class= "ico edit"})
+}

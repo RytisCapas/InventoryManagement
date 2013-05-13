@@ -9,8 +9,8 @@ namespace WarehouseInventoryManagement.DataEntities.Mappings
             Table("ItemLog");
 
             Id(f => f.Id).GeneratedBy.Identity();
-            References(f => f.Item);
-            References(f => f.State);
+            References(f => f.Item).Cascade.None();
+            References(f => f.State).Cascade.None();
             Map(f => f.CreatedOn).Not.Nullable().Default("getdate()").Generated.Insert();
             Map(f => f.CreatedBy).Not.Nullable();
             Map(f => f.DeletedBy).Nullable();

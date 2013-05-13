@@ -7,13 +7,11 @@ using MvcContrib.Pagination;
 using MvcContrib.Sorting;
 using MvcContrib.UI.Grid;
 using WarehouseInventoryManagement.DataEntities.Entities;
-using WarehouseInventoryManagement.DataEntities.Enums;
 using WarehouseInventoryManagement.Models.Dtos;
 using WarehouseInventoryManagement.Models.Mappers.EntityToViewModel;
 using WarehouseInventoryManagement.Models.Mappers.ViewModelToEntity;
 using WarehouseInventoryManagement.Models.Models;
 using WarehouseInventoryManagement.Models.Models.Message;
-using WarehouseInventoryManagement.Models.Models.User;
 using WarehouseInventoryManagement.ServiceContracts;
 
 namespace WarehouseInventoryManagement.Web.Controllers
@@ -38,41 +36,46 @@ namespace WarehouseInventoryManagement.Web.Controllers
             var entitiesperPage = !itemsPerPage.HasValue ? PagedEntityListFilterDto.DefaultItemsPerPage : itemsPerPage.Value;
             var currentPage = !page.HasValue ? 1 : page.Value;
 
-            //var userFilter = new PagedEntityListFilterDto
-            //{
-            //    AscendingOrder = gridSortOptions.Direction == SortDirection.Ascending,
-            //    Column = gridSortOptions.Column,
-            //    StartPage = currentPage,
-            //    ItemsPerPage = entitiesperPage,
-            //    SearchText = search
-            //};
+            var filter = new PagedEntityListFilterDto
+            {
+                AscendingOrder = gridSortOptions.Direction == SortDirection.Ascending,
+                Column = gridSortOptions.Column,
+                StartPage = currentPage,
+                ItemsPerPage = entitiesperPage,
+                SearchText = search
+            };
 
-            //var users = userService.GetPage(userFilter);
+            var entities = itemService.GetPage(filter);
 
-            //var userEntitiesViewModel = EntityToViewModelMapper.Mapper.Map(users.Entities, new List<UserViewModel>());
+            var entitiesViewModel = EntityToViewModelMapper.Mapper.Map(entities.Entities, new List<ItemViewModel>());
 
-            //var pagination = new CustomPagination<UserViewModel>(userEntitiesViewModel, users.Page, entitiesperPage, users.Count);
+            var pagination = new CustomPagination<ItemViewModel>(entitiesViewModel, entities.Page, entitiesperPage, entities.Count);
 
-            //var usersViewModel = new UserListViewModel
-            //{
-            //    Users = pagination,
-            //    GridSortOptions = gridSortOptions,
-            //    Page = currentPage,
-            //    Search = search
-            //};
+            var entitieslistViewModel = new ItemListViewModel
+            {
+                Items = pagination,
+                GridSortOptions = gridSortOptions,
+                Page = currentPage,
+                Search = search
+            };
 
-            //return View(usersViewModel);
-
-            return View();
+            return View(entitieslistViewModel);
         }
 
         [Authorize]
         [HttpGet]
-        public virtual ActionResult CreateItem(MessageViewModel messageModel)
+        public virtual ActionResult CreateItem(bool created = false)
         {
             var model = new ItemCreateViewModel();
+
+            model.Message = new MessageViewModel();
+
+            if (created)
+            {
+                model.Message.IsError = false;
+                model.Message.Message = "Naujas įrašas sukurtas sėkmingai";
+            }
             
-            model.Message = messageModel == null ? new MessageViewModel() : messageModel;
 
             return View(model);
         }
@@ -95,9 +98,7 @@ namespace WarehouseInventoryManagement.Web.Controllers
 
                     var savedItem = itemService.Create(item);
 
-                    message.Message = savedItem.Name + " išsaugotas sėkmingai";
-
-                    return RedirectToAction(MVC.Item.CreateItem(message));
+                    return RedirectToAction(MVC.Item.CreateItem(true));
 
                 }
                 catch (Exception ex)
@@ -107,6 +108,9 @@ namespace WarehouseInventoryManagement.Web.Controllers
                 }
 
             }
+
+            model = model ?? new ItemCreateViewModel(); 
+            model.Message = message;
 
             return View(model);
         }
@@ -122,5 +126,25 @@ namespace WarehouseInventoryManagement.Web.Controllers
             return null;
         }
 
+        [HttpPost]
+        [Authorize]
+        public virtual ActionResult Delete(Guid id, string returnUrl)
+        {
+            return null;
+        }
+
+        [Authorize]
+        [HttpGet]
+        public virtual ActionResult Edit(Guid id, string returnUrl)
+        {
+            return null;
+        }
+
+        [Authorize]
+        [HttpPost]
+        public virtual ActionResult Edit(ItemViewModel model)
+        {
+            return null;
+        }
     }
 }

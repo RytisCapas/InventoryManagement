@@ -15,8 +15,6 @@ namespace WarehouseInventoryManagement.ServiceContracts
 
         State Create(State state);
 
-        void SaveItemLog(Item item);
-
         State GetState(int id);
 
         List<Item> GetAll();

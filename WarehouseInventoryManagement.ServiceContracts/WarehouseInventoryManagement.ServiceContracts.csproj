@@ -58,6 +58,7 @@
     <Compile Include="IDataListingService.cs" />
     <Compile Include="IAgreementManagementService.cs" />
     <Compile Include="ICachingService.cs" />
+    <Compile Include="IItemLogService.cs" />
     <Compile Include="IItemService.cs" />
     <Compile Include="IRegistrationService.cs" />
     <Compile Include="IConfigurationLoaderService.cs" />

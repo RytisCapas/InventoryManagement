@@ -49,9 +49,15 @@ namespace WarehouseInventoryManagement.Web.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult CreateItem()
+        public virtual System.Web.Mvc.ActionResult Delete()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.CreateItem);
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Delete);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Edit()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -72,6 +78,8 @@ namespace WarehouseInventoryManagement.Web.Controllers
             public readonly string List = "List";
             public readonly string CreateItem = "CreateItem";
             public readonly string Index = "Index";
+            public readonly string Delete = "Delete";
+            public readonly string Edit = "Edit";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -80,6 +88,8 @@ namespace WarehouseInventoryManagement.Web.Controllers
             public const string List = "List";
             public const string CreateItem = "CreateItem";
             public const string Index = "Index";
+            public const string Delete = "Delete";
+            public const string Edit = "Edit";
         }
 
 
@@ -100,7 +110,26 @@ namespace WarehouseInventoryManagement.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_CreateItem
         {
-            public readonly string messageModel = "messageModel";
+            public readonly string created = "created";
+            public readonly string model = "model";
+        }
+        static readonly ActionParamsClass_Delete s_params_Delete = new ActionParamsClass_Delete();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Delete DeleteParams { get { return s_params_Delete; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Delete
+        {
+            public readonly string id = "id";
+            public readonly string returnUrl = "returnUrl";
+        }
+        static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Edit EditParams { get { return s_params_Edit; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Edit
+        {
+            public readonly string id = "id";
+            public readonly string returnUrl = "returnUrl";
             public readonly string model = "model";
         }
         static readonly ViewsClass s_views = new ViewsClass();
@@ -118,6 +147,21 @@ namespace WarehouseInventoryManagement.Web.Controllers
             }
             public readonly string CreateItem = "~/Views/Item/CreateItem.cshtml";
             public readonly string List = "~/Views/Item/List.cshtml";
+            static readonly _PartialClass s_Partial = new _PartialClass();
+            public _PartialClass Partial { get { return s_Partial; } }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public partial class _PartialClass
+            {
+                static readonly _ViewNamesClass s_ViewNames = new _ViewNamesClass();
+                public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
+                public class _ViewNamesClass
+                {
+                    public readonly string Controls = "Controls";
+                    public readonly string ListSearch = "ListSearch";
+                }
+                public readonly string Controls = "~/Views/Item/Partial/Controls.cshtml";
+                public readonly string ListSearch = "~/Views/Item/Partial/ListSearch.cshtml";
+            }
         }
     }
 
@@ -139,13 +183,13 @@ namespace WarehouseInventoryManagement.Web.Controllers
             return callInfo;
         }
 
-        partial void CreateItemOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, WarehouseInventoryManagement.Models.Models.Message.MessageViewModel messageModel);
+        partial void CreateItemOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, bool created);
 
-        public override System.Web.Mvc.ActionResult CreateItem(WarehouseInventoryManagement.Models.Models.Message.MessageViewModel messageModel)
+        public override System.Web.Mvc.ActionResult CreateItem(bool created)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.CreateItem);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "messageModel", messageModel);
-            CreateItemOverride(callInfo, messageModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "created", created);
+            CreateItemOverride(callInfo, created);
             return callInfo;
         }
 
@@ -165,6 +209,38 @@ namespace WarehouseInventoryManagement.Web.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void DeleteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Guid id, string returnUrl);
+
+        public override System.Web.Mvc.ActionResult Delete(System.Guid id, string returnUrl)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Delete);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
+            DeleteOverride(callInfo, id, returnUrl);
+            return callInfo;
+        }
+
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Guid id, string returnUrl);
+
+        public override System.Web.Mvc.ActionResult Edit(System.Guid id, string returnUrl)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
+            EditOverride(callInfo, id, returnUrl);
+            return callInfo;
+        }
+
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, WarehouseInventoryManagement.Models.Models.ItemViewModel model);
+
+        public override System.Web.Mvc.ActionResult Edit(WarehouseInventoryManagement.Models.Models.ItemViewModel model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            EditOverride(callInfo, model);
             return callInfo;
         }
 

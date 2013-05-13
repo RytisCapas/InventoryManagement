@@ -81,6 +81,18 @@ namespace WarehouseInventoryManagement.Tests.TestHelpers
 
         }
 
+        public Item CreateItem()
+        {
+            var item = new Item
+                {
+                    CreatedBy = ProvideRandomString(10),
+                    CreatedOn = ProvideRandomDateTime(),
+                    Name = ProvideRandomString(10)
+                };
+
+            return item;
+        }
+
         public Agreement CreateAgreement(Customer customer = null)
         {
             return new Agreement

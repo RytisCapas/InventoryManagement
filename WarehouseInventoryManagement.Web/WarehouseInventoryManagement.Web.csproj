@@ -319,6 +319,8 @@
     <Content Include="Views\Shared\Partial\Message.cshtml" />
     <Content Include="Views\Item\List.cshtml" />
     <Content Include="Views\Item\CreateItem.cshtml" />
+    <Content Include="Views\Item\Partial\ListSearch.cshtml" />
+    <Content Include="Views\Item\Partial\Controls.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Global.resx">

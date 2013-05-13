@@ -20,9 +20,10 @@ namespace WarehouseInventoryManagement.DataEntities.Entities
 
         public virtual double Weight { get; set; }
 
-        public virtual List<State> States { get; set; }
+        public virtual IList<State> States { get; set; }
 
-        public virtual List<ItemLog> Logs { get; set; } 
+        public virtual IList<ItemLog> Logs { get; set; } 
+
 
     }
 }

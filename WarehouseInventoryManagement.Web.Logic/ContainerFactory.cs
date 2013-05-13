@@ -41,6 +41,7 @@ namespace WarehouseInventoryManagement.Web.Logic
             builder.RegisterType<UserService>().AsImplementedInterfaces().InstancePerHttpRequest();
             builder.RegisterType<ItemService>().AsImplementedInterfaces().InstancePerHttpRequest();
             builder.RegisterType<CryptoService>().AsImplementedInterfaces().InstancePerHttpRequest();
+            builder.RegisterType<ItemLogService>().AsImplementedInterfaces().InstancePerHttpRequest();
 
             RegisterCommands(typeof(GetAgreementsCommand).Assembly, builder);
 

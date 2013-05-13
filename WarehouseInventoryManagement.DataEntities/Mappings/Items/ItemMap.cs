@@ -12,7 +12,7 @@ namespace WarehouseInventoryManagement.DataEntities.Mappings
 
             Map(f => f.Name).Nullable();
 
-            Map(f => f.Type).Not.Nullable();
+            Map(f => f.Type).Not.Nullable().Column("ItemType");
 
             Map(f => f.Height).Nullable();
 
@@ -23,9 +23,9 @@ namespace WarehouseInventoryManagement.DataEntities.Mappings
             Map(f => f.Weight).Nullable();
 
             HasManyToMany<State>(f => f.States)
-                .Table("UserRoles")
-                .ParentKeyColumn("UserId")
-                .ChildKeyColumn("RoleId")
+                .Table("ItemStates")
+                .ParentKeyColumn("ItemId")
+                .ChildKeyColumn("StateId")
                 .Cascade.All();
 
             HasMany<ItemLog>(f => f.Logs)

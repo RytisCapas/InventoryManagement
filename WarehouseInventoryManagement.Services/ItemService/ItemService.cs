@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
+using NHibernate;
+using NHibernate.Criterion;
+using NHibernate.Criterion.Lambda;
 using WarehouseInventoryManagement.DataContracts;
 using WarehouseInventoryManagement.DataEntities.Entities;
 using WarehouseInventoryManagement.DataEntities.Enums;
@@ -15,9 +18,12 @@ namespace WarehouseInventoryManagement.Services
 
         private IRepository repository;
 
-        public ItemService(IRepository repository)
+        private readonly IItemLogService itemLogService;
+
+        public ItemService(IRepository repository, IItemLogService itemLogService)
         {
             this.repository = repository;
+            this.itemLogService = itemLogService;
         }
 
         public Item Get(Guid id)
@@ -31,13 +37,14 @@ namespace WarehouseInventoryManagement.Services
             {
                 using (var transaction = new TransactionScope())
                 {
-                    item.CreatedOn = DateTime.Now;
                     item.ModifiedOn = DateTime.Now;
                     repository.Save(item);
                     repository.Commit();
 
                     transaction.Complete();
                 }
+
+                itemLogService.Save(item);
 
                 return item;
             }
@@ -61,11 +68,14 @@ namespace WarehouseInventoryManagement.Services
 
                     item.CreatedOn = DateTime.Now;
                     item.ModifiedOn = DateTime.Now;
+
                     repository.Save(item);
                     repository.Commit();
 
                     transaction.Complete();
                 }
+
+                itemLogService.Save(item);
 
                 return item;
             }
@@ -97,35 +107,6 @@ namespace WarehouseInventoryManagement.Services
             } 
         }
 
-        public void SaveItemLog(Item item)
-        {
-            try
-            {
-                var itemLog = new ItemLog
-                    {
-                        CreatedBy = "Anonymous",
-                        CreatedOn = DateTime.Now,
-                        Item = item,
-                        State = item.States.FirstOrDefault()
-                    };
-
-                using (var transaction = new TransactionScope())
-                {
-                    state.CreatedOn = DateTime.Now;
-                    state.IsDeleted = false;
-                    repository.Save(state);
-                    repository.Commit();
-
-                    transaction.Complete();
-                }
-
-                return state;
-            }
-            catch (Exception ex)
-            {
-                throw new ItemException(string.Format("Failed to save new item state '{0}'.", state.StateName), ex);
-            } 
-        }
 
         public State GetState(int id)
         {
@@ -150,7 +131,44 @@ namespace WarehouseInventoryManagement.Services
 
         public PagedEntityListDto<Item> GetPage(PagedEntityListFilterDto filter)
         {
-            throw new NotImplementedException();
+            try
+            {
+                int count;
+
+                var query = repository.AsQueryOver<Item>().Where(f => f.DeletedOn == null);
+
+                if (filter != null)
+                {
+                    query = AddSortingCriterias(filter, query);
+                }
+
+                if (!string.IsNullOrEmpty(filter.SearchText))
+                {
+                    query = AddSearchCriterias(filter.SearchText, query);
+                }
+
+                var entities = query
+                    .Skip((filter.StartPage - 1) * filter.ItemsPerPage)
+                    .Take(filter.ItemsPerPage)
+                    .Future<Item>();
+
+                var rowCount = CriteriaTransformer
+                    .TransformToRowCount(query.UnderlyingCriteria)
+                    .Future<int>();
+                count = rowCount.FirstOrDefault();
+                var entitiesList = entities.ToList();
+
+                var pagedList = new PagedEntityListDto<Item>(entitiesList, count);
+
+                pagedList.Page = filter.StartPage;
+
+                return pagedList;
+
+            }
+            catch (Exception ex)
+            {
+                throw new UserException("Failed to retrieve Users list.", ex);
+            }
         }
 
         public List<State> GetAllStates()
@@ -166,6 +184,47 @@ namespace WarehouseInventoryManagement.Services
         public void Delete(Guid id)
         {
             throw new NotImplementedException();
+        }
+
+        private static IQueryOver<Item, Item> AddSearchCriterias(string search, IQueryOver<Item, Item> query)
+        {
+            IList<ICriterion> searchCriterias = new List<ICriterion>();
+
+
+            searchCriterias.Add(Restrictions.On<Item>(x => x.Name).IsInsensitiveLike(string.Format("%{0}%", search.ToLower())));
+            searchCriterias.Add(Restrictions.On<Item>(x => x.Id).IsInsensitiveLike(string.Format("%{0}%", search.ToLower())));
+
+            query = CommonUtils.AddQueryOverSearchCriterias(query, searchCriterias);
+
+            return query;
+        }
+
+        private static IQueryOver<Item, Item> AddSortingCriterias(PagedEntityListFilterDto filter, IQueryOver<Item, Item> query)
+        {
+            IQueryOverOrderBuilder<Item, Item> builder = null;
+
+            switch (filter.Column)
+            {
+                case "Id":
+                    builder = query.OrderBy(x => x.Id);
+                    break;
+                case "Name":
+                    builder = query.OrderBy(x => x.Name);
+                    break;
+                case "CreatedOn":
+                    builder = query.OrderBy(x => x.CreatedOn);
+                    break;
+                case "ModifiedOn":
+                    builder = query.OrderBy(x => x.ModifiedOn);
+                    break;
+            }
+
+            if (builder != null)
+            {
+                query = filter.AscendingOrder ? builder.Asc : builder.Desc;
+            }
+
+            return query;
         }
     }
 }
