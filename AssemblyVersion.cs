@@ -1,8 +1,7 @@
 ﻿using System.Reflection;
 
-[assembly: AssemblyCompany("DevBridge Inc.")]
-[assembly: AssemblyProduct("Standard Web Project Template")]
-[assembly: AssemblyCopyright("DevBridge 2012")]
+[assembly: AssemblyProduct("Sandėlio inventoriaus valdymo sistema")]
+[assembly: AssemblyCopyright("Rytis Čapas 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

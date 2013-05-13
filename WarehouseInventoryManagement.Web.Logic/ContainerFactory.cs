@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 using Autofac;
 using Autofac.Integration.Mvc;
@@ -41,6 +39,7 @@ namespace WarehouseInventoryManagement.Web.Logic
             builder.RegisterType<DataListingService>().AsImplementedInterfaces().InstancePerHttpRequest();
             builder.RegisterType<DefaultCommandResolver>().AsImplementedInterfaces().InstancePerHttpRequest();
             builder.RegisterType<UserService>().AsImplementedInterfaces().InstancePerHttpRequest();
+            builder.RegisterType<ItemService>().AsImplementedInterfaces().InstancePerHttpRequest();
             builder.RegisterType<CryptoService>().AsImplementedInterfaces().InstancePerHttpRequest();
 
             RegisterCommands(typeof(GetAgreementsCommand).Assembly, builder);

@@ -1,0 +1,70 @@
+﻿@using WarehouseInventoryManagement.Models.Models
+@using WarehouseInventoryManagement.Tools.Extensions
+
+@model  ItemCreateViewModel
+@{ 
+    Layout = MVC.Shared.Views.Layouts.BaseLayout;
+}
+
+
+<!-- Box -->
+				<div class="box single-form">
+					<!-- Box Head -->
+					<div class="box-head">
+						<h2>Įtraukti naują įrašą</h2>
+					</div>
+				    <!-- End Box Head -->
+     @{
+        Html.RenderPartial(MVC.Shared.Views.Partial.Message,Model.Message);
+    }
+
+		@using (Html.BeginForm(MVC.Item.CreateItem(), FormMethod.Post, new {id = "login-form"}))
+		{
+		        <!-- Form -->
+		    <div class="form">
+		        <p>
+		            @Html.LabelFor(m => m.Name)
+		            @Html.TextBoxFor(m => m.Name, new { @class = "field size-login"})
+		            @Html.ValidationMessageFor(m => m.Name)
+		        </p>
+                <p>
+		            @Html.LabelFor(m => m.Type)
+		            @Html.DropDownListFor(m => m.Type, Model.Type.ToSelectList(), new { @class = "field size-login"})
+                    @Html.ValidationMessageFor(m => m.Name)
+		        </p>
+		        <p>
+		            @Html.LabelFor(m => m.Height)
+		            @Html.TextBoxFor(m => m.Height, new { @class = "field size-login"})
+		            @Html.ValidationMessageFor(m => m.Height)
+		        </p>
+		        <p>
+		            @Html.LabelFor(m => m.Length)
+		            @Html.TextBoxFor(m => m.Length, new { @class = "field size-login"})
+		            @Html.ValidationMessageFor(m => m.Length)
+		        </p>
+		        <p>
+		            @Html.LabelFor(m => m.Width)
+		            @Html.TextBoxFor(m => m.Width, new { @class = "field size-login"})
+		            @Html.ValidationMessageFor(m => m.Width)
+		        </p>
+                <p>
+		            @Html.LabelFor(m => m.Weight)
+		            @Html.TextBoxFor(m => m.Weight, new { @class = "field size-login"})
+		            @Html.ValidationMessageFor(m => m.Weight)
+		        </p>
+
+
+		    </div>
+      
+      
+		        <!-- End Form -->
+						
+		        <!-- Form Buttons -->
+		        <div class="buttons">
+		            <input type="submit" class="button" value="Sukurti" />
+		        </div>
+		        <!-- End Form Buttons -->
+		    
+		}
+				</div>
+<!-- End Box -->

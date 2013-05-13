@@ -26,7 +26,7 @@ public static class MVC
 {
     public static WarehouseInventoryManagement.Web.Controllers.AccountController Account = new WarehouseInventoryManagement.Web.Controllers.T4MVC_AccountController();
     public static WarehouseInventoryManagement.Web.Controllers.HomeController Home = new WarehouseInventoryManagement.Web.Controllers.T4MVC_HomeController();
-    public static WarehouseInventoryManagement.Web.Controllers.ProductController Product = new WarehouseInventoryManagement.Web.Controllers.T4MVC_ProductController();
+    public static WarehouseInventoryManagement.Web.Controllers.ItemController Item = new WarehouseInventoryManagement.Web.Controllers.T4MVC_ItemController();
     public static WarehouseInventoryManagement.Web.Controllers.UserController User = new WarehouseInventoryManagement.Web.Controllers.T4MVC_UserController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
@@ -65,6 +65,17 @@ internal class T4MVC_System_Web_Mvc_ActionResult : System.Web.Mvc.ActionResult, 
 
 namespace Links
 {
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public static class Scripts {
+        private const string URLPATH = "~/Scripts";
+        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+        public static readonly string shared_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/shared.min.js") ? Url("shared.min.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/shared.min.js") : Url("shared.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/shared.js");
+                      
+        public static readonly string user_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/user.min.js") ? Url("user.min.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/user.min.js") : Url("user.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/user.js");
+                      
+    }
+
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public static class Content {
         private const string URLPATH = "~/Content";

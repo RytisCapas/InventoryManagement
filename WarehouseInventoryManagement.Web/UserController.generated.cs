@@ -121,6 +121,7 @@ namespace WarehouseInventoryManagement.Web.Controllers
         {
             public readonly string id = "id";
             public readonly string returnUrl = "returnUrl";
+            public readonly string model = "model";
         }
         static readonly ActionParamsClass_CreateUser s_params_CreateUser = new ActionParamsClass_CreateUser();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -141,9 +142,11 @@ namespace WarehouseInventoryManagement.Web.Controllers
             public class _ViewNamesClass
             {
                 public readonly string CreateUser = "CreateUser";
+                public readonly string Edit = "Edit";
                 public readonly string List = "List";
             }
             public readonly string CreateUser = "~/Views/User/CreateUser.cshtml";
+            public readonly string Edit = "~/Views/User/Edit.cshtml";
             public readonly string List = "~/Views/User/List.cshtml";
             static readonly _PartialClass s_Partial = new _PartialClass();
             public _PartialClass Partial { get { return s_Partial; } }
@@ -209,6 +212,16 @@ namespace WarehouseInventoryManagement.Web.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
             EditOverride(callInfo, id, returnUrl);
+            return callInfo;
+        }
+
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, WarehouseInventoryManagement.Models.Models.User.UserViewModel model);
+
+        public override System.Web.Mvc.ActionResult Edit(WarehouseInventoryManagement.Models.Models.User.UserViewModel model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            EditOverride(callInfo, model);
             return callInfo;
         }
 

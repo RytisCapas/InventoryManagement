@@ -8,9 +8,13 @@ namespace WarehouseInventoryManagement.ServiceContracts
     {
         User GetUserByUsername(string username);
 
+        User GetUserById(int id);
+
         bool IsUserAuthenticated();
 
         User GetCurrentUser();
+
+        User SaveUser(User user);
 
         User CreateUser(User user);
 
@@ -21,5 +25,7 @@ namespace WarehouseInventoryManagement.ServiceContracts
         PagedEntityListDto<User> GetPage(PagedEntityListFilterDto filter);
 
         List<Role> GetAllRoles();
+
+        void Delete(int id);
     }
 }

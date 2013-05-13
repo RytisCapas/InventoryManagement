@@ -59,9 +59,11 @@ namespace T4MVC
                 public class _ViewNamesClass
                 {
                     public readonly string Header = "Header";
+                    public readonly string Message = "Message";
                     public readonly string Pager = "Pager";
                 }
                 public readonly string Header = "~/Views/Shared/Partial/Header.cshtml";
+                public readonly string Message = "~/Views/Shared/Partial/Message.cshtml";
                 public readonly string Pager = "~/Views/Shared/Partial/Pager.cshtml";
             }
         }

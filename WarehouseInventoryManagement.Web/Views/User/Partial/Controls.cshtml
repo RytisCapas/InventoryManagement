@@ -2,6 +2,6 @@
 
 @if(Model != null)
 {
-    @Html.ActionLink("Ištrinti", MVC.User.Delete(Model.Id, Request.Url.PathAndQuery), new { @class= "ico del"})
+    @Html.ActionLink("Ištrinti", MVC.User.Delete(Model.Id, Request.Url.PathAndQuery), new { @class= "ico del delete-user"})
     @Html.ActionLink("Redaguoti", MVC.User.Edit(Model.Id, Request.Url.PathAndQuery), new { @class= "ico edit"})
 }

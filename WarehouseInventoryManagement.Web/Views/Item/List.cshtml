@@ -1,13 +1,7 @@
-﻿@using Links
-@using MvcContrib.UI.Grid;
-@using WarehouseInventoryManagement.Models.Models.User
+﻿@using WarehouseInventoryManagement.Models.Models.User
 @using WarehouseInventoryManagement.Tools
-
-@model  UserListViewModel
-@{ 
-    ViewBag.Title = "Vartotojai";
+@{
     Layout = MVC.Shared.Views.Layouts.BaseLayout;
-    var search = Model.Search;
 }
 
 				<!-- Box -->
@@ -26,7 +20,7 @@
     <div class="table">
 	
                         
-        @Html.Grid(Model.Users).Sort(Model.GridSortOptions).Columns(column =>
+@*        @Html.Grid(Model.Users).Sort(Model.GridSortOptions).Columns(column =>
             {
                 column.For(f => f.Id).Named("#").SortColumnName("Id").HeaderAttributes(@style => "width:35px").Attributes(@class => "aright");
                 column.For(f => f.UserName).Named("Prisijungimo vardas").SortColumnName("UserName");
@@ -47,13 +41,8 @@
                 @Html.Partial(MVC.Shared.Views.Partial.Pager, Model.Users, new ViewDataDictionary { { "Url", @link } })
             </div>
 					        
-        </div>
+        </div>*@
     </div>
     <!-- Table -->
 					
 </div>
-
-@section HeaderSection{
-    <script src="@Scripts.user_js" type="text/javascript"></script>
-}
-

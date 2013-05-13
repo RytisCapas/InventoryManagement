@@ -154,7 +154,7 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -164,7 +164,7 @@
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="ProductController.generated.cs">
+    <Compile Include="ItemController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -203,6 +203,8 @@
     <Content Include="Content\css\images\th.gif" />
     <Content Include="Content\css\style.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\shared.js" />
+    <Content Include="Scripts\user.js" />
     <Content Include="T4MVC.tt.settings.xml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -313,6 +315,10 @@
     </None>
     <None Include="Properties\PublishProfiles\WIM_smarterAsp.pubxml" />
     <Content Include="Views\User\CreateUser.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\Shared\Partial\Message.cshtml" />
+    <Content Include="Views\Item\List.cshtml" />
+    <Content Include="Views\Item\CreateItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Global.resx">

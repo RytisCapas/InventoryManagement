@@ -1,0 +1,23 @@
+﻿@model WarehouseInventoryManagement.Models.Models.Message.MessageViewModel 
+
+
+@if (Model != null && !string.IsNullOrEmpty(Model.Message))
+{
+    if (Model.IsError)
+    {
+        <div class="msg msg-error">
+	        <p><strong>@Html.DisplayTextFor(m => m.Message)</strong></p>
+	        <a href="#" class="close">uždaryti</a>
+        </div>
+    }
+    else
+    {
+        <div class="msg msg-ok">
+            <p><strong>@Html.DisplayTextFor(m => m.Message)</strong></p>
+            <a href="#" class="close">uždaryti</a>
+    </div>
+    }    
+}
+
+
+

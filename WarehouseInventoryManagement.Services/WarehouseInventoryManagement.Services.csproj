@@ -63,6 +63,8 @@
     <Compile Include="..\AssemblyVersion.cs">
       <Link>Properties\AssemblyVersion.cs</Link>
     </Compile>
+    <Compile Include="ItemService\ItemException.cs" />
+    <Compile Include="ItemService\ItemService.cs" />
     <Compile Include="RegistrationService\RegistrationException.cs" />
     <Compile Include="ServiceException.cs" />
     <Compile Include="AgreementManagementService\AgreementManagementException.cs" />

@@ -38,7 +38,23 @@ namespace WarehouseInventoryManagement.Services
             }
             catch (Exception ex)
             {
-                throw new AgreementManagementException("Failed to retrieve agreements list.", ex);
+                throw new UserException("Failed to retrieve user by username.", ex);
+            }
+        }
+
+        public User GetUserById(int id)
+        {
+            try
+            {
+                var query = repository.AsQueryOver<User>()
+                    .Where(f => f.DeletedOn == null && f.Id == id)
+                    .Future();
+
+                return query.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw new UserException("Failed to retrieve user by id.", ex);
             }
         }
 
@@ -107,6 +123,27 @@ namespace WarehouseInventoryManagement.Services
             {
                 throw new UserException(string.Format("Failed to register user with User Name '{0}'.", user.UserName), ex);
             }              
+        }
+
+        public User SaveUser(User user)
+        {
+            try
+            {
+                using (var transaction = new TransactionScope())
+                {
+                    user.ModifiedOn = DateTime.Now;
+                    repository.Save(user);
+                    repository.Commit();
+
+                    transaction.Complete();
+                }
+
+                return user;
+            }
+            catch (Exception ex)
+            {
+                throw new UserException(string.Format("Failed to save user with User Name '{0}'.", user.UserName), ex);
+            }
         }
 
         public User ValidateUser(string username, string password)
@@ -207,6 +244,19 @@ namespace WarehouseInventoryManagement.Services
                 throw new UserException("Failed to retrieve Role list.", ex);
             }
         } 
+
+        public void Delete(int id)
+        {
+            try
+            {
+                repository.Delete<User>(id);
+                repository.Commit();
+            }
+            catch (Exception ex)
+            {
+                throw new UserException(string.Format("Failed to delete user {0}.", id), ex);
+            }
+        }
 
         private static IQueryOver<User, User> AddSearchCriterias(string search, IQueryOver<User, User> query)
         {
