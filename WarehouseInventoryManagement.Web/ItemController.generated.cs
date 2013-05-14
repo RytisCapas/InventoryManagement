@@ -143,9 +143,11 @@ namespace WarehouseInventoryManagement.Web.Controllers
             public class _ViewNamesClass
             {
                 public readonly string CreateItem = "CreateItem";
+                public readonly string Edit = "Edit";
                 public readonly string List = "List";
             }
             public readonly string CreateItem = "~/Views/Item/CreateItem.cshtml";
+            public readonly string Edit = "~/Views/Item/Edit.cshtml";
             public readonly string List = "~/Views/Item/List.cshtml";
             static readonly _PartialClass s_Partial = new _PartialClass();
             public _PartialClass Partial { get { return s_Partial; } }
@@ -234,9 +236,9 @@ namespace WarehouseInventoryManagement.Web.Controllers
             return callInfo;
         }
 
-        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, WarehouseInventoryManagement.Models.Models.ItemViewModel model);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, WarehouseInventoryManagement.Models.Models.Item.ItemEditViewModel model);
 
-        public override System.Web.Mvc.ActionResult Edit(WarehouseInventoryManagement.Models.Models.ItemViewModel model)
+        public override System.Web.Mvc.ActionResult Edit(WarehouseInventoryManagement.Models.Models.Item.ItemEditViewModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);

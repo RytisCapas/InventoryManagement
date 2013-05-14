@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using WarehouseInventoryManagement.DataEntities.Entities;
-using WarehouseInventoryManagement.DataEntities.Enums;
 using WarehouseInventoryManagement.Models.Models;
 
 namespace WarehouseInventoryManagement.Models.Mappers.EntityToViewModel
@@ -23,10 +20,15 @@ namespace WarehouseInventoryManagement.Models.Mappers.EntityToViewModel
             }
             destination.Id = source.Id;
             destination.Name = source.Name;
+            destination.SerialNumber = source.SerialNumber;
             destination.CreatedOn = source.CreatedOn;
             destination.CreatedBy = source.CreatedBy;
             destination.ModifiedOn = source.ModifiedOn;
             destination.ModifiedBy = source.ModifiedBy;
+
+            var state = source.States.FirstOrDefault();
+
+            destination.StateName = state == null ? "-" : state.StateName;
 
             return destination;
 

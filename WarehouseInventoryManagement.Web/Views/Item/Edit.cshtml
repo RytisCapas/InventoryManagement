@@ -1,7 +1,6 @@
-﻿@using WarehouseInventoryManagement.Models.Models
-@using WarehouseInventoryManagement.Tools.Extensions
+﻿@using WarehouseInventoryManagement.Tools.Extensions
 
-@model  ItemCreateViewModel
+@model  WarehouseInventoryManagement.Models.Models.Item.ItemEditViewModel
 @{ 
     Layout = MVC.Shared.Views.Layouts.BaseLayout;
 }
@@ -11,31 +10,38 @@
 				<div class="box single-form">
 					<!-- Box Head -->
 					<div class="box-head">
-						<h2>Įtraukti naują įrašą</h2>
+						<h2>Redaguoti įrašą</h2>
 					</div>
 				    <!-- End Box Head -->
      @{
         Html.RenderPartial(MVC.Shared.Views.Partial.Message,Model.Message);
     }
 
-		@using (Html.BeginForm(MVC.Item.CreateItem(), FormMethod.Post, new {id = "login-form"}))
+		@using (Html.BeginForm(MVC.Item.Edit(), FormMethod.Post, new {id = "login-form"}))
 		{
 		        <!-- Form -->
 		    <div class="form">
+		        @Html.HiddenFor(x => x.Id)
+		        <p>
+		            @Html.LabelFor(m => m.Id)
+		            <span>
+                        @Html.DisplayTextFor(m => m.Id)
+                    </span>
+		        </p>
 		        <p>
 		            @Html.LabelFor(m => m.Name)
 		            @Html.TextBoxFor(m => m.Name, new { @class = "field size-login"})
 		            @Html.ValidationMessageFor(m => m.Name)
 		        </p>
-                <p>
+		        <p>
 		            @Html.LabelFor(m => m.SerialNumber)
 		            @Html.TextBoxFor(m => m.SerialNumber, new { @class = "field size-login"})
 		            @Html.ValidationMessageFor(m => m.SerialNumber)
 		        </p>
-                <p>
+		        <p>
 		            @Html.LabelFor(m => m.Type)
 		            @Html.DropDownListFor(m => m.Type, Model.Type.ToSelectList(), new { @class = "field size-login"})
-                    @Html.ValidationMessageFor(m => m.Name)
+		            @Html.ValidationMessageFor(m => m.Type)
 		        </p>
 		        <p>
 		            @Html.LabelFor(m => m.Height)
@@ -52,10 +58,15 @@
 		            @Html.TextBoxFor(m => m.Width, new { @class = "field size-login"})
 		            @Html.ValidationMessageFor(m => m.Width)
 		        </p>
-                <p>
+		        <p>
 		            @Html.LabelFor(m => m.Weight)
 		            @Html.TextBoxFor(m => m.Weight, new { @class = "field size-login"})
 		            @Html.ValidationMessageFor(m => m.Weight)
+		        </p>
+                <p>
+		            @Html.LabelFor(m => m.States)
+		            @Html.DropDownListFor(m => m.States, Model.States.ToSelectList(), new { @class = "field size-login"})
+		            @Html.ValidationMessageFor(m => m.States)
 		        </p>
 
 
@@ -66,7 +77,7 @@
 						
 		        <!-- Form Buttons -->
 		        <div class="buttons">
-		            <input type="submit" class="button" value="Sukurti" />
+		            <input type="submit" class="button" value="Išsaugoti" />
 		        </div>
 		        <!-- End Form Buttons -->
 		    

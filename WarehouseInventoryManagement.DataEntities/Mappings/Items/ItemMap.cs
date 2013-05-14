@@ -10,6 +10,8 @@ namespace WarehouseInventoryManagement.DataEntities.Mappings
 
             Id(f => f.Id).GeneratedBy.GuidComb();
 
+            Map(f => f.SerialNumber).Nullable();
+
             Map(f => f.Name).Nullable();
 
             Map(f => f.Type).Not.Nullable().Column("ItemType");
@@ -29,7 +31,7 @@ namespace WarehouseInventoryManagement.DataEntities.Mappings
                 .Cascade.All();
 
             HasMany<ItemLog>(f => f.Logs)
-                .Cascade.All();
+                .Cascade.None();
         }
     }
 }

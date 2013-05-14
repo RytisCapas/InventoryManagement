@@ -25,6 +25,6 @@ namespace WarehouseInventoryManagement.ServiceContracts
 
         void DeleteRole(int id);
 
-        void Delete(Guid id);
+        void Delete(Item item);
     }
 }

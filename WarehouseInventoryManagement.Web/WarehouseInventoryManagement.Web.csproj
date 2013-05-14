@@ -155,6 +155,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\ItemLogController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -203,6 +204,7 @@
     <Content Include="Content\css\images\th.gif" />
     <Content Include="Content\css\style.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\item.js" />
     <Content Include="Scripts\shared.js" />
     <Content Include="Scripts\user.js" />
     <Content Include="T4MVC.tt.settings.xml" />
@@ -321,6 +323,7 @@
     <Content Include="Views\Item\CreateItem.cshtml" />
     <Content Include="Views\Item\Partial\ListSearch.cshtml" />
     <Content Include="Views\Item\Partial\Controls.cshtml" />
+    <Content Include="Views\Item\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Global.resx">

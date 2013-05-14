@@ -28,7 +28,18 @@ namespace WarehouseInventoryManagement.Services
 
         public Item Get(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = repository.AsQueryOver<Item>()
+                    .Where(f => f.DeletedOn == null && f.Id == id)
+                    .Future();
+
+                return query.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw new ItemException("Failed to retrieve Item by Guid.", ex);
+            }
         }
 
         public Item Save(Item item)
@@ -167,13 +178,23 @@ namespace WarehouseInventoryManagement.Services
             }
             catch (Exception ex)
             {
-                throw new UserException("Failed to retrieve Users list.", ex);
+                throw new ItemException("Failed to retrieve Users list.", ex);
             }
         }
 
         public List<State> GetAllStates()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = repository.AsQueryOver<State>().Where(f => f.DeletedOn == null).Future();
+
+                return query.ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw new ItemException("Failed to retrieve State list.", ex);
+            }
         }
 
         public void DeleteRole(int id)
@@ -181,9 +202,18 @@ namespace WarehouseInventoryManagement.Services
             throw new NotImplementedException();
         }
 
-        public void Delete(Guid id)
+        public void Delete(Item item)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                repository.Delete<Item>(item);
+                repository.Commit();
+            }
+            catch (Exception ex)
+            {
+                throw new ItemException(string.Format("Failed to delete item {0}.", item.Id), ex);
+            }
         }
 
         private static IQueryOver<Item, Item> AddSearchCriterias(string search, IQueryOver<Item, Item> query)
@@ -192,7 +222,14 @@ namespace WarehouseInventoryManagement.Services
 
 
             searchCriterias.Add(Restrictions.On<Item>(x => x.Name).IsInsensitiveLike(string.Format("%{0}%", search.ToLower())));
-            searchCriterias.Add(Restrictions.On<Item>(x => x.Id).IsInsensitiveLike(string.Format("%{0}%", search.ToLower())));
+            searchCriterias.Add(Restrictions.On<Item>(x => x.SerialNumber).IsInsensitiveLike(string.Format("%{0}%", search.ToLower())));
+
+            Guid guid;
+
+            if (Guid.TryParse(search, out guid))
+            {
+                searchCriterias.Add(Restrictions.On<User>(x => x.Id).IsLike(guid));
+            }
 
             query = CommonUtils.AddQueryOverSearchCriterias(query, searchCriterias);
 
@@ -210,6 +247,9 @@ namespace WarehouseInventoryManagement.Services
                     break;
                 case "Name":
                     builder = query.OrderBy(x => x.Name);
+                    break;
+                case "SerialNumber":
+                    builder = query.OrderBy(x => x.SerialNumber);
                     break;
                 case "CreatedOn":
                     builder = query.OrderBy(x => x.CreatedOn);

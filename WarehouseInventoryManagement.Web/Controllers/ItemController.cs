@@ -11,8 +11,10 @@ using WarehouseInventoryManagement.Models.Dtos;
 using WarehouseInventoryManagement.Models.Mappers.EntityToViewModel;
 using WarehouseInventoryManagement.Models.Mappers.ViewModelToEntity;
 using WarehouseInventoryManagement.Models.Models;
+using WarehouseInventoryManagement.Models.Models.Item;
 using WarehouseInventoryManagement.Models.Models.Message;
 using WarehouseInventoryManagement.ServiceContracts;
+using WarehouseInventoryManagement.Tools.Helpers;
 
 namespace WarehouseInventoryManagement.Web.Controllers
 {
@@ -130,21 +132,138 @@ namespace WarehouseInventoryManagement.Web.Controllers
         [Authorize]
         public virtual ActionResult Delete(Guid id, string returnUrl)
         {
-            return null;
+            var content = string.Empty;
+            var success = true;
+            var model = new MessageViewModel { IsError = true, Message = string.Empty };
+
+
+            if (id != new Guid())
+            {
+                try
+                {
+                    var item = itemService.Get(id);
+
+                    if (item != null)
+                    {
+                        itemService.Delete(item);
+                    }
+                    else
+                    {
+                        model.Message = "Nepavyko ištrinti, įrašas nerastas";
+                        success = false;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    model.Message = "Trinant įvyko klaida, bandykite dar kartą";
+                    success = false;
+                }
+
+            }
+            else
+            {
+                model.Message = "Nepavyko ištrinti, įrašas nerastas";
+                success = false;
+            }
+
+            if (!success)
+            {
+                content = this.RenderPartialView(MVC.Shared.Views.Partial.Message, model);
+            }
+
+            return Json(new
+            {
+                Success = success,
+                Content = content
+            });
         }
 
         [Authorize]
         [HttpGet]
         public virtual ActionResult Edit(Guid id, string returnUrl)
         {
-            return null;
+            if (id != new Guid())
+            {
+                try
+                {
+                    var item = itemService.Get(id);
+
+                    if (item == null)
+                    {
+                        return RedirectToAction(MVC.Item.List());
+                    }
+
+                    var viewModel = EntityToViewModelMapper.Mapper.Map(item, new ItemEditViewModel());
+
+                    return View(viewModel);
+                }
+                catch (Exception ex)
+                {
+                    
+                    throw;
+                }
+
+            }
+            return RedirectToAction(MVC.Item.List());
         }
 
         [Authorize]
         [HttpPost]
-        public virtual ActionResult Edit(ItemViewModel model)
+        public virtual ActionResult Edit(ItemEditViewModel model)
         {
-            return null;
+            if (model == null || !ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            try
+            {
+                var originalItem = itemService.Get(model.Id);
+
+                if (originalItem == null)
+                {
+                    return RedirectToAction(MVC.Item.List());
+                }
+
+                var updated = ViewModelToEntityMapper.Mapper.Map(model, originalItem);
+
+                var states = itemService.GetAllStates();
+
+                updated.States = new List<State>();
+
+                if (states != null && states.Any())
+                {
+                    updated.States.Add(states.Find(x => x.Id == (int)model.States));
+                }
+
+                var savedItem = itemService.Save(updated);
+
+                if (savedItem != null)
+                {
+                    ModelState.Clear();
+                    var viewModel = EntityToViewModelMapper.Mapper.Map(savedItem, new ItemEditViewModel());
+                    viewModel.Message = new MessageViewModel
+                    {
+                        IsError = false,
+                        Message = "Įrašas atnaujintas"
+                    };
+
+                    return View(viewModel);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                model.Message = new MessageViewModel
+                {
+                    IsError = true,
+                    Message = "Išsaugant įvyko klaida, bandykite dar kartą"
+                };
+                return View(model);
+            }
+
+            return RedirectToAction(MVC.Item.List());
         }
     }
 }

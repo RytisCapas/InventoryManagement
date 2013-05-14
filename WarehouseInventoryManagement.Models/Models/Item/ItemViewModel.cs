@@ -8,6 +8,10 @@ namespace WarehouseInventoryManagement.Models.Models
 
         public string Name { get; set; }
 
+        public string SerialNumber { get; set; }
+
+        public string StateName { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public string CreatedBy { get; set; }

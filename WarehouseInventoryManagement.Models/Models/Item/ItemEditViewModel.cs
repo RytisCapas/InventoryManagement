@@ -1,15 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using WarehouseInventoryManagement.DataEntities.Enums;
 using WarehouseInventoryManagement.Models.Models.Message;
 
-namespace WarehouseInventoryManagement.Models.Models
+namespace WarehouseInventoryManagement.Models.Models.Item
 {
-    public class ItemCreateViewModel
+    public class ItemEditViewModel
     {
-        public ItemCreateViewModel()
+        public ItemEditViewModel()
         {
             Message = new MessageViewModel();
         }
+
+        [Display(Name = "Id")]
+        public Guid Id { get; set; }
 
         [Display(Name = "Serijinis numbers")]
         public string SerialNumber { get; set; }
@@ -37,6 +41,10 @@ namespace WarehouseInventoryManagement.Models.Models
         [Display(Name = "Svoris")]
         [RegularExpression(@"[0-9]*\.?[0-9]+", ErrorMessage = "Svoris turi būti skačius")]
         public double Weight { get; set; }
+
+        [Display(Name = "Būsena")]
+        [Required(ErrorMessage = "Pasirinkite būseną")]
+        public StateEnum States { get; set; }
 
         public MessageViewModel Message { get; set; }
 

@@ -102,7 +102,7 @@ namespace WarehouseInventoryManagement.Services
 
         public void Save(Item item)
         {
-            if (item == null)
+            if (item == null || !item.States.Any())
             {
                 return;
             }

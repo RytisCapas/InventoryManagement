@@ -70,6 +70,8 @@ namespace Links
         private const string URLPATH = "~/Scripts";
         public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+        public static readonly string item_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/item.min.js") ? Url("item.min.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/item.min.js") : Url("item.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/item.js");
+                      
         public static readonly string shared_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/shared.min.js") ? Url("shared.min.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/shared.min.js") : Url("shared.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/shared.js");
                       
         public static readonly string user_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/user.min.js") ? Url("user.min.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/user.min.js") : Url("user.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/user.js");

@@ -113,6 +113,7 @@ namespace WarehouseInventoryManagement.Web.Controllers
             {
                 content = this.RenderPartialView(MVC.Shared.Views.Partial.Message, model);
             }
+
             return Json(new
                 {
                     Success = success,

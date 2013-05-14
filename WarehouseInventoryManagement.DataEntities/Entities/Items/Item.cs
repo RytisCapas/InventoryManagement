@@ -8,6 +8,8 @@ namespace WarehouseInventoryManagement.DataEntities.Entities
     {
         public virtual new Guid Id { get; set; }
 
+        public virtual string SerialNumber { get; set; }
+
         public virtual string Name { get; set; }
 
         public virtual ItemType Type { get; set; }

@@ -55,10 +55,12 @@
     <Compile Include="Mappers\DtoToViewModel\DtoToViewModelMapper.cs" />
     <Compile Include="Mappers\EntityToDto\EntityToDtoMapper.cs" />
     <Compile Include="Mappers\EntityToViewModel\EntityToViewModelMapper.cs" />
-    <Compile Include="Mappers\EntityToViewModel\MapperItemToItemListViewModel.cs" />
+    <Compile Include="Mappers\EntityToViewModel\Mapper.ItemToItemEditViewModel.cs" />
+    <Compile Include="Mappers\EntityToViewModel\Mapper.ItemToItemListViewModel.cs" />
     <Compile Include="Mappers\MapperBase.cs" />
     <Compile Include="Mappers\ViewModelToDto\ViewModelToDto.Mapper.cs" />
-    <Compile Include="Mappers\ViewModelToEntity\ItemCreateViewModelToItem.cs" />
+    <Compile Include="Mappers\ViewModelToEntity\Mapper.ItemCreateViewModelToItem.cs" />
+    <Compile Include="Mappers\ViewModelToEntity\Mapper.ItemEditViewModelToItem.cs" />
     <Compile Include="Mappers\ViewModelToEntity\Mapper.UserCreateViewModelToUser.cs" />
     <Compile Include="Mappers\ViewModelToEntity\Mapper.UserViewModelToUser.cs" />
     <Compile Include="Mappers\ViewModelToEntity\ViewModelToEntityMapper.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="Models\Account\LoginViewModel.cs" />
     <Compile Include="Mappers\EntityToViewModel\Mapper.UserToUserViewModel.cs" />
     <Compile Include="Models\Item\ItemCreateViewModel.cs" />
+    <Compile Include="Models\Item\ItemEditViewModel.cs" />
     <Compile Include="Models\Item\ItemListViewModel.cs" />
     <Compile Include="Models\Item\ItemViewModel.cs" />
     <Compile Include="Models\Message\MessageViewModel.cs" />
