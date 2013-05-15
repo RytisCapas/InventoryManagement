@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
-using System.Web;
+using System.Drawing.Printing;
 using System.Web.Mvc;
 using MvcContrib.Pagination;
 using MvcContrib.Sorting;
@@ -16,15 +17,19 @@ using WarehouseInventoryManagement.Models.Models.Message;
 using WarehouseInventoryManagement.ServiceContracts;
 using WarehouseInventoryManagement.Tools.Helpers;
 
+
 namespace WarehouseInventoryManagement.Web.Controllers
 {
     public partial class ItemController : Controller
     {
         private readonly IItemService itemService;
 
-        public ItemController(IItemService itemService)
+        private readonly IItemLogService itemLogService;
+
+        public ItemController(IItemService itemService, IItemLogService itemLogService)
         {
             this.itemService = itemService;
+            this.itemLogService = itemLogService;
         }
 
         [Authorize]
@@ -226,6 +231,8 @@ namespace WarehouseInventoryManagement.Web.Controllers
                     return RedirectToAction(MVC.Item.List());
                 }
 
+                var stateId = originalItem.States.FirstOrDefault() == null ? 0 : originalItem.States.FirstOrDefault().Id; 
+
                 var updated = ViewModelToEntityMapper.Mapper.Map(model, originalItem);
 
                 var states = itemService.GetAllStates();
@@ -241,6 +248,11 @@ namespace WarehouseInventoryManagement.Web.Controllers
 
                 if (savedItem != null)
                 {
+                    if (savedItem.States.FirstOrDefault().Id != stateId)
+                    {
+                        itemLogService.Save(savedItem);
+                    }
+
                     ModelState.Clear();
                     var viewModel = EntityToViewModelMapper.Mapper.Map(savedItem, new ItemEditViewModel());
                     viewModel.Message = new MessageViewModel
@@ -265,5 +277,23 @@ namespace WarehouseInventoryManagement.Web.Controllers
 
             return RedirectToAction(MVC.Item.List());
         }
+
+        [Authorize]
+        
+        [Authorize]
+        [HttpGet]
+        public virtual ActionResult GenerateQRCode(Guid id)
+        {
+            var imgUrl = string.Format("http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl={0}", id);
+
+            var model = new QRCodeGeneratorViewModel
+                {
+                    Id = id,
+                    Url = imgUrl
+                };
+
+            return View(model);
+        }
     }
 }
+ 

@@ -191,3 +191,21 @@ a.active-pager {border-color: #8c3521;background: #ba4c32;color: #fff;}
 .checkbox-label { width: 30%;float: left;}
 
 .field-validation-error {color: #f00;}
+
+input.datepicker { margin: -3px 0 0 5px; }
+
+input.left-field { margin-right: 10px;}
+
+.download-button,
+.download-button span { float:left; height:26px; background:url(images/download-button.gif) no-repeat 0 0; padding:0 0 0 28px; }
+.download-button span { background-position:right 0; padding:0 10px 0 0; }
+.download-button { font-weight: bold; font-size:12px; color:#747474; text-decoration: none; line-height:26px; }
+.download-button:hover { color:#333;}
+
+.print-button,
+.print-button span { float:left; height:26px; background:url(images/print-button.gif) no-repeat 0 0; padding:0 0 0 28px; }
+.print-button span { background-position:right 0; padding:0 10px 0 0; }
+.print-button { font-weight: bold; font-size:12px; color:#747474; text-decoration: none; line-height:26px; }
+.print-button:hover { color:#333;}
+
+.box-head h2 { float: left;}

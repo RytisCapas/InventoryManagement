@@ -1,0 +1,20 @@
+﻿@model  WarehouseInventoryManagement.Models.Models.DateFilter
+
+@{
+    var startDate = Model.DateFrom != DateTime.MinValue ? Model.DateFrom.ToString("yyyy-MM-dd") : string.Empty;
+
+    var endDate = Model.DateTo != DateTime.MinValue ? Model.DateTo.ToString("yyyy-MM-dd") : string.Empty;
+}
+
+@using (Html.BeginForm(MVC.ItemLog.List(), FormMethod.Get, new { id = "search-form", @class = "form-inline" }))
+{
+    @Html.LabelFor(x => x.DateFrom)
+    @Html.TextBoxFor(x => x.DateFrom, new { @class = "field datepicker left-field", @Value = startDate})
+
+    @Html.LabelFor(x => x.DateTo)
+    @Html.TextBoxFor(x => x.DateTo, new { @class = "field datepicker", @Value = endDate})
+
+    <input type="submit" class="button" value="Ieškoti" />    
+}
+
+<a href="@Url.Action(MVC.ItemLog.ExportLogsToCsv())?DateFrom=@startDate&DateTo=@endDate" class="download-button add-head"><span>Atsisiųsti</span></a>

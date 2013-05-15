@@ -4,6 +4,7 @@ using System.Linq;
 using System.Transactions;
 using WarehouseInventoryManagement.DataContracts;
 using WarehouseInventoryManagement.DataEntities.Entities;
+using WarehouseInventoryManagement.Models.Models;
 using WarehouseInventoryManagement.ServiceContracts;
 
 namespace WarehouseInventoryManagement.Services
@@ -59,7 +60,38 @@ namespace WarehouseInventoryManagement.Services
             }
             catch (Exception ex)
             {
-                throw new UserException("Failed to retrieve user by username.", ex);
+                throw new ItemException("Failed to retrieve user by username.", ex);
+            }
+        }
+
+        public List<ItemLog> GetItemLogs(DateFilter filter)
+        {
+            try
+            {
+                var query = repository.AsQueryOver<ItemLog>()
+                                      .Where(f => f.DeletedOn == null 
+                                          //&& f.Item.DeletedOn == null
+                                          );
+
+                if (filter.DateFrom != DateTime.MinValue)
+                {
+                    query = query.Where(f => f.CreatedOn >= filter.DateFrom);
+                }
+
+                if (filter.DateTo != DateTime.MinValue)
+                {
+                    filter.DateTo = filter.DateTo.AddDays(1).AddSeconds(-1);
+                    query = query.Where(f => f.CreatedOn <= filter.DateTo);
+                }
+                query = query.OrderBy(f => f.CreatedOn).Asc;
+
+                var future = query.Future();
+
+                return future.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new ItemException("Failed to retrieve item logs.", ex);
             }
         }
 

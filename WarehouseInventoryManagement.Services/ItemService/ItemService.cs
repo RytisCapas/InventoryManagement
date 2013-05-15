@@ -55,7 +55,6 @@ namespace WarehouseInventoryManagement.Services
                     transaction.Complete();
                 }
 
-                itemLogService.Save(item);
 
                 return item;
             }

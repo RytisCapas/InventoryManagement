@@ -27,6 +27,7 @@ public static class MVC
     public static WarehouseInventoryManagement.Web.Controllers.AccountController Account = new WarehouseInventoryManagement.Web.Controllers.T4MVC_AccountController();
     public static WarehouseInventoryManagement.Web.Controllers.HomeController Home = new WarehouseInventoryManagement.Web.Controllers.T4MVC_HomeController();
     public static WarehouseInventoryManagement.Web.Controllers.ItemController Item = new WarehouseInventoryManagement.Web.Controllers.T4MVC_ItemController();
+    public static WarehouseInventoryManagement.Web.Controllers.ItemLogController ItemLog = new WarehouseInventoryManagement.Web.Controllers.T4MVC_ItemLogController();
     public static WarehouseInventoryManagement.Web.Controllers.UserController User = new WarehouseInventoryManagement.Web.Controllers.T4MVC_UserController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
@@ -72,6 +73,15 @@ namespace Links
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
         public static readonly string item_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/item.min.js") ? Url("item.min.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/item.min.js") : Url("item.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/item.js");
                       
+        public static readonly string jquery_1_9_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.9.1.min.js") ? Url("jquery-1.9.1.min.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/jquery-1.9.1.min.js") : Url("jquery-1.9.1.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/jquery-1.9.1.js");
+                      
+        public static readonly string jquery_ui_1_10_3_custom_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-ui-1.10.3.custom.min.js") ? Url("jquery-ui-1.10.3.custom.min.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/jquery-ui-1.10.3.custom.min.js") : Url("jquery-ui-1.10.3.custom.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/jquery-ui-1.10.3.custom.js");
+                      
+        public static readonly string jquery_ui_1_10_3_custom_min_js = Url("jquery-ui-1.10.3.custom.min.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/jquery-ui-1.10.3.custom.min.js");
+        public static readonly string jquery_ui_datepicker_lt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.ui.datepicker-lt.min.js") ? Url("jquery.ui.datepicker-lt.min.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/jquery.ui.datepicker-lt.min.js") : Url("jquery.ui.datepicker-lt.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/jquery.ui.datepicker-lt.js");
+                      
+        public static readonly string print_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/print.min.js") ? Url("print.min.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/print.min.js") : Url("print.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/print.js");
+                      
         public static readonly string shared_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/shared.min.js") ? Url("shared.min.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/shared.min.js") : Url("shared.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/shared.js");
                       
         public static readonly string user_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/user.min.js") ? Url("user.min.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/user.min.js") : Url("user.js")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/user.js");
@@ -94,19 +104,39 @@ namespace Links
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 public static readonly string add_button_gif = Url("add-button.gif")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/add-button.gif");
+                public static readonly string animated_overlay_gif = Url("animated-overlay.gif")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/animated-overlay.gif");
                 public static readonly string button_gif = Url("button.gif")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/button.gif");
                 public static readonly string close_gif = Url("close.gif")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/close.gif");
                 public static readonly string del_gif = Url("del.gif")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/del.gif");
+                public static readonly string download_button_gif = Url("download-button.gif")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/download-button.gif");
                 public static readonly string edit_gif = Url("edit.gif")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/edit.gif");
                 public static readonly string footer_gif = Url("footer.gif")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/footer.gif");
                 public static readonly string header_gif = Url("header.gif")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/header.gif");
                 public static readonly string msg_error_gif = Url("msg-error.gif")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/msg-error.gif");
                 public static readonly string msg_ok_gif = Url("msg-ok.gif")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/msg-ok.gif");
                 public static readonly string pagging_gif = Url("pagging.gif")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/pagging.gif");
+                public static readonly string print_button_gif = Url("print-button.gif")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/print-button.gif");
                 public static readonly string tab_gif = Url("tab.gif")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/tab.gif");
                 public static readonly string th_gif = Url("th.gif")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/th.gif");
+                public static readonly string ui_bg_diagonals_thick_18_b81900_40x40_png = Url("ui-bg_diagonals-thick_18_b81900_40x40.png")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/ui-bg_diagonals-thick_18_b81900_40x40.png");
+                public static readonly string ui_bg_diagonals_thick_20_666666_40x40_png = Url("ui-bg_diagonals-thick_20_666666_40x40.png")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/ui-bg_diagonals-thick_20_666666_40x40.png");
+                public static readonly string ui_bg_flat_10_000000_40x100_png = Url("ui-bg_flat_10_000000_40x100.png")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/ui-bg_flat_10_000000_40x100.png");
+                public static readonly string ui_bg_glass_100_f6f6f6_1x400_png = Url("ui-bg_glass_100_f6f6f6_1x400.png")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/ui-bg_glass_100_f6f6f6_1x400.png");
+                public static readonly string ui_bg_glass_100_fdf5ce_1x400_png = Url("ui-bg_glass_100_fdf5ce_1x400.png")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/ui-bg_glass_100_fdf5ce_1x400.png");
+                public static readonly string ui_bg_glass_65_ffffff_1x400_png = Url("ui-bg_glass_65_ffffff_1x400.png")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/ui-bg_glass_65_ffffff_1x400.png");
+                public static readonly string ui_bg_gloss_wave_35_f6a828_500x100_png = Url("ui-bg_gloss-wave_35_f6a828_500x100.png")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/ui-bg_gloss-wave_35_f6a828_500x100.png");
+                public static readonly string ui_bg_highlight_soft_100_eeeeee_1x100_png = Url("ui-bg_highlight-soft_100_eeeeee_1x100.png")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/ui-bg_highlight-soft_100_eeeeee_1x100.png");
+                public static readonly string ui_bg_highlight_soft_75_ffe45c_1x100_png = Url("ui-bg_highlight-soft_75_ffe45c_1x100.png")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/ui-bg_highlight-soft_75_ffe45c_1x100.png");
+                public static readonly string ui_icons_222222_256x240_png = Url("ui-icons_222222_256x240.png")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/ui-icons_222222_256x240.png");
+                public static readonly string ui_icons_228ef1_256x240_png = Url("ui-icons_228ef1_256x240.png")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/ui-icons_228ef1_256x240.png");
+                public static readonly string ui_icons_ef8c08_256x240_png = Url("ui-icons_ef8c08_256x240.png")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/ui-icons_ef8c08_256x240.png");
+                public static readonly string ui_icons_ffd27a_256x240_png = Url("ui-icons_ffd27a_256x240.png")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/ui-icons_ffd27a_256x240.png");
+                public static readonly string ui_icons_ffffff_256x240_png = Url("ui-icons_ffffff_256x240.png")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/ui-icons_ffffff_256x240.png");
             }
         
+            public static readonly string jquery_ui_1_10_3_custom_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-ui-1.10.3.custom.min.css") ? Url("jquery-ui-1.10.3.custom.min.css")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/jquery-ui-1.10.3.custom.min.css") : Url("jquery-ui-1.10.3.custom.css")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/jquery-ui-1.10.3.custom.css");
+                 
+            public static readonly string jquery_ui_1_10_3_custom_min_css = Url("jquery-ui-1.10.3.custom.min.css")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/jquery-ui-1.10.3.custom.min.css");
             public static readonly string style_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/style.min.css") ? Url("style.min.css")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/style.min.css") : Url("style.css")+"?"+T4MVCHelpers.TimestampString(URLPATH + "/style.css");
                  
         }

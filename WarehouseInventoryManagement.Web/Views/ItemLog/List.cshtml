@@ -1,0 +1,46 @@
+﻿@using MvcContrib.UI.Grid
+@using WarehouseInventoryManagement.Models.Models
+@{
+    Layout = MVC.Shared.Views.Layouts.BaseLayout;
+}
+
+@model ItemLogListViewModel 
+				<!-- Box -->
+<div class="box">
+    <!-- Box Head -->
+    <div class="box-head">
+        <h2 class="left">Ataskaitos</h2>
+        <div class="right">
+            
+            @{
+                Html.RenderPartial(MVC.ItemLog.Views.Partial.FilterForm, Model.DateFilter);
+            }
+
+        </div>
+    </div>
+    <!-- End Box Head -->	
+
+    <!-- Table -->
+    <div class="table">
+	
+                        
+        @Html.Grid(Model.Logs).Columns(column =>
+            {
+                column.For(f => f.ItemId).Named("#").Sortable(false).HeaderAttributes(@style => "width:145px").Attributes(@class => "aright");
+                column.For(f => f.ItemName).Named("Pavadinimas").Sortable(false);
+                column.For(f => f.StateName).Named("Būsena").Sortable(false);
+                column.For(f => f.ModifiedOn).Named("Keitimo data").Sortable(false);
+                column.For(f => f.ModifiedBy).Named("Keitė").Sortable(false);
+                column.For(f => f.CreatedOn).Named("Sukūrimo data").Sortable(false);
+    
+            }
+             ).Attributes(@id => " productListTable", @class => "data-table buttons-cell tablesorter", @width =>"100%", @cellspacing => "0", @cellpadding => "0"
+             )
+                        
+    </div>
+    <!-- Table -->
+					
+</div>
+
+@section HeaderSection{
+}

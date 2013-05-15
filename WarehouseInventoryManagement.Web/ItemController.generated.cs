@@ -59,6 +59,12 @@ namespace WarehouseInventoryManagement.Web.Controllers
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult GenerateQRCode()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.GenerateQRCode);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ItemController Actions { get { return MVC.Item; } }
@@ -80,6 +86,7 @@ namespace WarehouseInventoryManagement.Web.Controllers
             public readonly string Index = "Index";
             public readonly string Delete = "Delete";
             public readonly string Edit = "Edit";
+            public readonly string GenerateQRCode = "GenerateQRCode";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -90,6 +97,7 @@ namespace WarehouseInventoryManagement.Web.Controllers
             public const string Index = "Index";
             public const string Delete = "Delete";
             public const string Edit = "Edit";
+            public const string GenerateQRCode = "GenerateQRCode";
         }
 
 
@@ -132,6 +140,14 @@ namespace WarehouseInventoryManagement.Web.Controllers
             public readonly string returnUrl = "returnUrl";
             public readonly string model = "model";
         }
+        static readonly ActionParamsClass_GenerateQRCode s_params_GenerateQRCode = new ActionParamsClass_GenerateQRCode();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_GenerateQRCode GenerateQRCodeParams { get { return s_params_GenerateQRCode; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_GenerateQRCode
+        {
+            public readonly string id = "id";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -144,10 +160,12 @@ namespace WarehouseInventoryManagement.Web.Controllers
             {
                 public readonly string CreateItem = "CreateItem";
                 public readonly string Edit = "Edit";
+                public readonly string GenerateQRCode = "GenerateQRCode";
                 public readonly string List = "List";
             }
             public readonly string CreateItem = "~/Views/Item/CreateItem.cshtml";
             public readonly string Edit = "~/Views/Item/Edit.cshtml";
+            public readonly string GenerateQRCode = "~/Views/Item/GenerateQRCode.cshtml";
             public readonly string List = "~/Views/Item/List.cshtml";
             static readonly _PartialClass s_Partial = new _PartialClass();
             public _PartialClass Partial { get { return s_Partial; } }
@@ -243,6 +261,16 @@ namespace WarehouseInventoryManagement.Web.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             EditOverride(callInfo, model);
+            return callInfo;
+        }
+
+        partial void GenerateQRCodeOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Guid id);
+
+        public override System.Web.Mvc.ActionResult GenerateQRCode(System.Guid id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.GenerateQRCode);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            GenerateQRCodeOverride(callInfo, id);
             return callInfo;
         }
 

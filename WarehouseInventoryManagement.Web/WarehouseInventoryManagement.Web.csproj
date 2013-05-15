@@ -168,6 +168,9 @@
     <Compile Include="ItemController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ItemLogController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Global.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -191,20 +194,44 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\css\images\add-button.gif" />
+    <Content Include="Content\css\images\animated-overlay.gif" />
     <Content Include="Content\css\images\button.gif" />
     <Content Include="Content\css\images\close.gif" />
     <Content Include="Content\css\images\del.gif" />
+    <Content Include="Content\css\images\download-button.gif" />
     <Content Include="Content\css\images\edit.gif" />
     <Content Include="Content\css\images\footer.gif" />
     <Content Include="Content\css\images\header.gif" />
     <Content Include="Content\css\images\msg-error.gif" />
     <Content Include="Content\css\images\msg-ok.gif" />
     <Content Include="Content\css\images\pagging.gif" />
+    <Content Include="Content\css\images\print-button.gif" />
     <Content Include="Content\css\images\tab.gif" />
     <Content Include="Content\css\images\th.gif" />
+    <Content Include="Content\css\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Content\css\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Content\css\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Content\css\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Content\css\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Content\css\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\css\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Content\css\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Content\css\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Content\css\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\css\jquery-ui-1.10.3.custom.css" />
+    <Content Include="Content\css\jquery-ui-1.10.3.custom.min.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\item.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-ui-1.10.3.custom.js" />
+    <Content Include="Scripts\jquery-ui-1.10.3.custom.min.js" />
+    <Content Include="Scripts\jquery.ui.datepicker-lt.js" />
+    <Content Include="Scripts\print.js" />
     <Content Include="Scripts\shared.js" />
     <Content Include="Scripts\user.js" />
     <Content Include="T4MVC.tt.settings.xml" />
@@ -324,6 +351,9 @@
     <Content Include="Views\Item\Partial\ListSearch.cshtml" />
     <Content Include="Views\Item\Partial\Controls.cshtml" />
     <Content Include="Views\Item\Edit.cshtml" />
+    <Content Include="Views\ItemLog\List.cshtml" />
+    <Content Include="Views\ItemLog\Partial\FilterForm.cshtml" />
+    <Content Include="Views\Item\GenerateQRCode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Global.resx">

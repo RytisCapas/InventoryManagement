@@ -1,4 +1,5 @@
-﻿@using WarehouseInventoryManagement.Tools.Extensions
+﻿@using Links
+@using WarehouseInventoryManagement.Tools.Extensions
 
 @model  WarehouseInventoryManagement.Models.Models.Item.ItemEditViewModel
 @{ 
@@ -10,7 +11,10 @@
 				<div class="box single-form">
 					<!-- Box Head -->
 					<div class="box-head">
-						<h2>Redaguoti įrašą</h2>
+					    <h2>Redaguoti įrašą</h2>
+					    <div class="right">
+					         <a href="@Url.Action(MVC.Item.GenerateQRCode(Model.Id))" target="_blank" class="print-button add-head"><span>Spausdinti QR kodą</span></a>
+					    </div>
 					</div>
 				    <!-- End Box Head -->
      @{
@@ -84,3 +88,6 @@
 		}
 				</div>
 <!-- End Box -->
+@section HeaderSection{
+    <script src="@Scripts.item_js" type="text/javascript"></script>
+}

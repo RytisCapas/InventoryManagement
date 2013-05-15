@@ -7,6 +7,7 @@ Item = (function ($) {
 
     $(function () {
         $(function () {
+
             $('.delete-item').on('click', function () {
                 $.post(this.href, function (resp) {
                     if (resp.Success) {
@@ -20,6 +21,7 @@ Item = (function ($) {
                 });
                 return false;
             });
+            
         });
     });
 

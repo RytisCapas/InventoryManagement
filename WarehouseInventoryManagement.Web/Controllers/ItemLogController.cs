@@ -9,11 +9,13 @@ using MvcContrib.UI.Grid;
 using WarehouseInventoryManagement.Models.Dtos;
 using WarehouseInventoryManagement.Models.Mappers.EntityToViewModel;
 using WarehouseInventoryManagement.Models.Models;
+using WarehouseInventoryManagement.Models.Models.Item;
 using WarehouseInventoryManagement.ServiceContracts;
+using WarehouseInventoryManagement.Tools.Helpers;
 
 namespace WarehouseInventoryManagement.Web.Controllers
 {
-    public class ItemLogController : Controller
+    public partial class ItemLogController : Controller
     {
         private readonly IItemService itemService;
 
@@ -25,40 +27,37 @@ namespace WarehouseInventoryManagement.Web.Controllers
             this.itemLogService = itemLogService;
         }
 
-        public ActionResult List(GridSortOptions gridSortOptions, int? page = null, int? itemsPerPage = null, string search = null)
+        [Authorize]
+        public virtual ActionResult List(DateFilter model)
         {
-            if (gridSortOptions.Column == null)
-            {
-                gridSortOptions.Column = "Id";
-            }
+            model = model ?? new DateFilter();
+            var entities = itemLogService.GetItemLogs(model);
 
-            var entitiesperPage = !itemsPerPage.HasValue ? PagedEntityListFilterDto.DefaultItemsPerPage : itemsPerPage.Value;
-            var currentPage = !page.HasValue ? 1 : page.Value;
+            var entitiesViewModel = EntityToViewModelMapper.Mapper.Map(entities, new List<ItemLogViewModel>());
 
-            var filter = new PagedEntityListFilterDto
+            var viewModel = new ItemLogListViewModel
+                {
+                    DateFilter = model,
+                    Logs = entitiesViewModel
+                };
+
+            return View(viewModel);
+        }
+
+        [Authorize]
+        public virtual ActionResult ExportLogsToCsv(DateFilter model)
+        {
+            model = model ?? new DateFilter();
+            var entities = itemLogService.GetItemLogs(model);
+
+            var entitiesViewModel = EntityToViewModelMapper.Mapper.Map(entities, new List<ItemLogViewModel>());
+
+            var date = DateTime.Now.ToShortDateString().Replace(@"/", @"-");
+
+            return new CsvResult<ItemLogViewModel>(entitiesViewModel)
             {
-                AscendingOrder = gridSortOptions.Direction == SortDirection.Ascending,
-                Column = gridSortOptions.Column,
-                StartPage = currentPage,
-                ItemsPerPage = entitiesperPage,
-                SearchText = search
+                FileDownloadName = string.Format("Ataskaita_{0}.csv",  date)
             };
-
-            var entities = itemService.GetPage(filter);
-
-            var entitiesViewModel = EntityToViewModelMapper.Mapper.Map(entities.Entities, new List<ItemViewModel>());
-
-            var pagination = new CustomPagination<ItemViewModel>(entitiesViewModel, entities.Page, entitiesperPage, entities.Count);
-
-            var entitieslistViewModel = new ItemListViewModel
-            {
-                Items = pagination,
-                GridSortOptions = gridSortOptions,
-                Page = currentPage,
-                Search = search
-            };
-
-            return null;
         }
 
     }
